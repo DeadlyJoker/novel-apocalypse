@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>末日进化：基因王座</title>
+    <!-- Markdown 解析库 -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -23,15 +25,24 @@
         }
         h1 { color: #c0392b; text-align: center; margin-bottom: 10px; font-size: 2em; }
         .subtitle { text-align: center; color: #666; margin-bottom: 30px; font-size: 0.9em; }
-        .chapter-list { list-style: none; margin-bottom: 40px; }
-        .chapter-list li { padding: 15px; border-bottom: 1px solid #eee; }
-        .chapter-list a { color: #2c3e50; text-decoration: none; font-weight: 500; display: block; }
+        .chapter-list { list-style: none; margin-bottom: 40px; background: #fafafa; padding: 20px; border-radius: 8px; }
+        .chapter-list li { padding: 12px 0; border-bottom: 1px solid #eee; }
+        .chapter-list li:last-child { border-bottom: none; }
+        .chapter-list a { color: #2c3e50; text-decoration: none; font-weight: 500; display: block; cursor: pointer; }
         .chapter-list a:hover { color: #c0392b; }
-        .chapter { margin-top: 50px; padding-top: 30px; border-top: 3px solid #c0392b; }
+        .chapter-list .meta { font-size: 0.85em; color: #999; margin-top: 5px; }
+        .chapter { margin-top: 50px; padding-top: 30px; border-top: 3px solid #c0392b; display: none; }
+        .chapter.active { display: block; }
         .chapter h2 { color: #2c3e50; margin-bottom: 20px; font-size: 1.5em; }
         .chapter p { margin-bottom: 15px; text-indent: 2em; }
-        .system-msg { background: #e8f4f8; border-left: 4px solid #3498db; padding: 10px 15px; margin: 20px 0; font-family: monospace; font-size: 0.9em; }
+        .system-msg { background: #e8f4f8; border-left: 4px solid #3498db; padding: 10px 15px; margin: 20px 0; font-family: monospace; font-size: 0.9em; border-radius: 0 4px 4px 0; }
+        .chapter-nav { display: flex; justify-content: space-between; margin: 30px 0; padding: 15px 0; border-top: 1px solid #eee; }
+        .chapter-nav a { color: #3498db; text-decoration: none; padding: 8px 16px; border-radius: 4px; }
+        .chapter-nav a:hover { background: #3498db; color: white; }
+        .chapter-nav a.disabled { color: #ccc; pointer-events: none; }
         footer { text-align: center; margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; color: #999; font-size: 0.8em; }
+        .loading { text-align: center; padding: 40px; color: #666; }
+        .error { text-align: center; padding: 40px; color: #e74c3c; }
         @media (max-width: 600px) { body { padding: 10px; } .container { padding: 20px; } h1 { font-size: 1.5em; } }
     </style>
 </head>
@@ -42,277 +53,105 @@
         
         <div class="chapter-list">
             <h3 style="margin-bottom: 15px; color: #666;">📖 章节目录</h3>
-            <li><a href="#chapter1">第一章：红雨之夜，她敲开了我的门</a></li>
-            <li><a href="#chapter2">第二章：雷霆觉醒，她的身体在发光</a></li>
-            <li><a href="#chapter3">第三章：杀戮开始，这栋楼里还有活人</a></li>
-            <li><a href="#chapter4">第四章：基因药剂，她的第一次主动</a></li>
-            <li><a href="#chapter5">第五章：二阶精英，嗜血的快感</a></li>
+            <div id="chapter-list-content">加载中...</div>
         </div>
 
-        <div id="chapter1" class="chapter">
-            <h2>第一章：红雨之夜，她敲开了我的门</h2>
-            <p><strong>暴雨如注。</strong></p>
-            <p>秦烈站在窗前，看着窗外诡异的红色雨水顺着玻璃蜿蜒而下，像血。</p>
-            <p>手机屏幕亮着，一条紧急推送刺入眼帘：</p>
-            <div class="system-msg">【国家应急管理部】红色警报：不明化学物质泄漏，请全体市民立即关闭门窗，不要接触雨水，等待进一步通知。</div>
-            <p>"化学物质？"秦烈冷笑一声，"你见过会发红的化学物质？"</p>
-            <p>他曾是北部战区最年轻的特种部队教官，三年前因伤退役，在这座名为"江城"的二线城市买了套顶层公寓，本想隐姓埋名过平静日子。</p>
-            <p>但今晚，不对劲。</p>
-            <p>楼下传来第一声惨叫时，秦烈正在擦拭那把跟随他多年的军用匕首。</p>
-            <p>凄厉的尖叫声穿透雨幕，像一把刀划破夜空。紧接着是第二声、第三声……此起彼伏，夹杂着什么东西被撕碎的闷响。</p>
-            <p>秦烈放下匕首，走到窗边向下望去。</p>
-            <p>小区路灯下，一个浑身是血的人正趴在另一个人身上，疯狂地撕咬着什么。暗红色的血液混着雨水在地面流淌，而那个被扑倒的人……已经不动了。</p>
-            <p>"丧尸？"秦烈眉头一皱，"还是生化危机？"</p>
-            <div class="system-msg">叮——<br>【检测到宿主生命体征稳定，符合绑定条件】<br>【天命进化系统正在激活……】<br>【激活成功！】<br><br>【欢迎使用天命进化系统，宿主：秦烈】<br>【当前基因锁状态：未觉醒（0/100）】<br>【可用进化点：0】<br>【已解锁功能：基因解析、危险预知、能力吞噬】</div>
-            <p>秦烈愣了三秒，然后笑了。</p>
-            <p>"系统？"他喃喃自语，"小说看多了吧……"</p>
-            <p>但脑海中那个清晰的面板告诉他，这不是幻觉。</p>
-            <p><strong>砰！砰！砰！</strong></p>
-            <p>急促的敲门声突然响起，打断了秦烈的思绪。</p>
-            <p>"秦哥！秦哥你在吗？求求你开开门！"</p>
-            <p>是个女人的声音，带着哭腔，颤抖得厉害。</p>
-            <p>秦烈走到门后，透过猫眼向外看去。</p>
-            <p>门外站着的是他的邻居，苏清雪。</p>
-            <p>这个女人他认识，住在对门，据说是某家大公司的高管，平时总是穿着一身职业装，妆容精致，眼神冷得像冰。小区里的男人们私下里都叫她"冰山女神"，只可远观。</p>
-            <p>但此刻的苏清雪，狼狈得像换了一个人。</p>
-            <p>她身上的白色衬衫被雨水浸透，紧紧贴在身上，勾勒出惊心动魄的曲线。黑色长裙下摆被撕开一道口子，露出白皙的小腿，上面有几道清晰的抓痕，正在渗血。</p>
-            <p>长发凌乱地散在肩头，脸上满是泪痕，眼神里充满了恐惧。</p>
-            <p>"秦哥，求你了，外面……外面有怪物！"苏清雪还在敲门，声音已经带了哭腔，"我亲眼看到它吃人！求求你让我进去！"</p>
-            <p>秦烈没有立刻开门。</p>
-            <p>"你被咬了吗？"他隔着门问道，声音冷静得可怕。</p>
-            <p>"没有！我没有被咬！"苏清雪急忙摇头，"我只是逃跑的时候被抓伤了……我真的没被咬，秦哥你相信我！"</p>
-            <p style="text-align: center; color: #999; margin-top: 30px;">（第一章完）</p>
-        </div>
-
-        <div id="chapter2" class="chapter">
-            <h2>第二章：雷霆觉醒，她的身体在发光</h2>
-            <p>秦烈回到公寓时，楼道里已经安静得可怕。</p>
-            <p>刚才那只堕落者的尸体还躺在二楼拐角，但血腥味已经引来了更多怪物。远处传来此起彼伏的嘶吼声，像是在宣告这个夜晚的疯狂。</p>
-            <p>他放轻脚步，回到自家门口。</p>
-            <p>"今晚的月亮是什么颜色？"门内传来苏清雪颤抖的声音。</p>
-            <p>秦烈嘴角微扬："今晚没有月亮。"</p>
-            <p>门几乎是在瞬间打开的。</p>
-            <p>苏清雪看到他回来，明显松了口气，但随即又紧张起来："外面……怎么样？"</p>
-            <p>"确认了。"秦烈走进屋，关上门，"不是电影里的丧尸，比那更麻烦。"</p>
-            <p>他走到窗边，向下望去。</p>
-            <p>小区里的情况比刚才更糟了。街道上到处都是游荡的堕落者，数量至少有二三十只。偶尔能看到几个幸存者在奔跑，但很快就会被扑倒，淹没在血泊中。</p>
-            <p>"我们……我们该怎么办？"苏清雪跟了过来，声音里带着无助。</p>
-            <p>秦烈转头看向她。</p>
-            <p>这一看，让他微微一怔。</p>
-            <p>苏清雪的身体周围，竟然有一层若有若无的白色光晕，像是某种能量场。虽然很微弱，但在他觉醒系统的视野里，格外明显。</p>
-            <div class="system-msg">【检测到高浓度基因反应】<br>【目标：苏清雪】<br>【状态：基因觉醒前夕】<br>【建议：辅助觉醒，可获得共鸣奖励】</div>
-            <p>"你……"秦烈走近她，"有没有觉得身体有什么异样？"</p>
-            <p>苏清雪愣了一下，低头看向自己的身体："我……我不知道，就是觉得有点热，好像……好像有什么东西在皮肤下面流动……"</p>
-            <p>她说话的时候，那层白色光晕变得更明显了。</p>
-            <p>秦烈伸出手，想要触碰她，但犹豫了一下："我可以试试帮你吗？可能会有一些……特殊的感觉。"</p>
-            <p>苏清雪看着他的眼睛，那双深邃的眼眸里没有任何邪念，只有认真。</p>
-            <p>鬼使神差地，她点了点头。</p>
-            <p>秦烈的手掌轻轻按在她的肩膀上。</p>
-            <p>一瞬间，苏清雪浑身剧颤！</p>
-            <p>一股奇异的能量从秦烈的手掌涌入她的身体，像是电流，但又比电流更温和。那股能量在她体内游走，所过之处，每一个细胞都在欢呼，在雀跃。</p>
-            <p>"啊……"苏清雪忍不住发出一声低吟，双腿一软，整个人靠在秦烈身上。</p>
-            <p>她的身体很烫，烫得惊人。</p>
-            <p style="text-align: center; color: #999; margin-top: 30px;">（第二章完）</p>
-        </div>
-
-        <div id="chapter3" class="chapter">
-            <h2>第三章：杀戮开始，这栋楼里还有活人</h2>
-            <p>清晨六点，天边泛起一抹诡异的暗红色。</p>
-            <p>红雨还在下，但比昨晚小了一些。空气中的血腥味浓得化不开，混合着某种腐烂的气息，让人作呕。</p>
-            <p>秦烈早早起床，站在窗前观察楼下的情况。</p>
-            <p>那群堕落者还在，数量似乎更多了。那只二阶精英站在最中间，仰着头，像是在嗅着什么。</p>
-            <p>"它在找我们。"秦烈低声说。</p>
-            <p>苏清雪不知何时已经站在他身后，身上依然穿着那件黑色 T 恤，经过一晚，已经习惯了这种暧昧的穿着方式。</p>
-            <p>"我们得离开这里吗？"她问。</p>
-            <p>"不。"秦烈摇头，"这栋楼是高层建筑，易守难攻。而且……"</p>
-            <p>他顿了顿："这栋楼里，还有其他幸存者。"</p>
-            <p>苏清雪一怔："你怎么知道？"</p>
-            <p>"昨晚我出去的时候，听到其他楼层有动静。"秦烈说，"有人在哭，有人在求救，还有人在……尖叫。"</p>
-            <p>苏清雪沉默了。</p>
-            <p>她昨晚几乎没怎么睡，一直靠在秦烈怀里，感受着他的体温和心跳。那种安全感，是她二十八年来从未有过的。</p>
-            <p>"我们要去救他们吗？"她问。</p>
-            <p>秦烈看着她，目光深邃："不是救，是招募。这个世界已经变了，想要活下去，必须抱团。"</p>
-            <p style="text-align: center; color: #999; margin-top: 30px;">（第三章完）</p>
-        </div>
-
-        <div id="chapter4" class="chapter">
-            <h2>第四章：基因药剂，她的第一次主动</h2>
-            <p>23 层的门被敲响了。</p>
-            <p>"有人吗？我们是来救援的！"苏清雪按照秦烈的指示喊道。</p>
-            <p>门内一片寂静。</p>
-            <p>秦烈做了个手势，示意后退。他贴在门边，仔细倾听。</p>
-            <p>没有呼吸声，没有脚步声，只有……咀嚼声。</p>
-            <p>很低沉，很缓慢，像是野兽在享用猎物。</p>
-            <p>"退后。"秦烈低声说。</p>
-            <p>赵明急忙抱住女儿，退到楼道拐角。苏清雪也拉着他的妻子往后撤。</p>
-            <p>秦烈深吸一口气，猛地踹开了门！</p>
-            <p>客厅里的景象，让见惯了生死的他都皱了皱眉。</p>
-            <p>沙发上，一个男人正趴在女人身上，疯狂地撕咬着。女人的喉咙已经被咬断，鲜血喷了一墙。而在他们旁边，一个小女孩……不，曾经是小女孩的东西，正用已经变形的手爪，抓挠着地上的碎肉。</p>
-            <p>三只堕落者。</p>
-            <p>听到动静，它们同时转过头，血红色的眼睛死死盯着秦烈。</p>
-            <p>"吼——！"</p>
-            <p>趴在女人身上的那只最先扑过来，动作比之前的堕落者更快，更灵活！</p>
-            <p>秦烈眼神一冷，侧身闪避，同时手枪连开两枪！</p>
-            <p>砰！砰！</p>
-            <p>两只堕落者头部中弹，应声倒地。</p>
-            <p style="text-align: center; color: #999; margin-top: 30px;">（第四章完）</p>
-        </div>
-
-        <div id="chapter5" class="chapter">
-            <h2>第五章：二阶精英，嗜血的快感</h2>
-            <p>20 层设备层的门被踹开时，里面传来一阵低沉的嘶吼。</p>
-            <p>秦烈做了个噤声的手势，示意众人退后。他贴着墙壁，慢慢探头向内看去。</p>
-            <p>这是一个巨大的空间，原本是开发商预留的设备间，现在却成了堕落者的巢穴。</p>
-            <p>五只堕落者散落在各处，有的蹲在地上啃食着什么，有的在漫无目的地游荡。而在最中央，站着一个体型格外高大的身影。</p>
-            <p>两米五的身高，浑身肌肉虬结，皮肤呈现出诡异的紫黑色。它的眼睛是血红色的，瞳孔竖立，像是野兽。</p>
-            <div class="system-msg">【检测到高危目标】<br>【目标：堕落者精英（二阶）】<br>【威胁等级：中】<br>【建议：团队配合，优先击杀】</div>
-            <p>秦烈眼神一冷。</p>
-            <p>这就是昨晚他在窗口看到的那只二阶精英。它居然追到这里来了。</p>
-            <p>"赵明，带着他们退到楼道。"秦烈低声说，"这里交给我和清雪。"</p>
-            <p>"可是……"赵明还想说什么。</p>
-            <p>"退后。"秦烈语气不容置疑。</p>
-            <p>赵明咬咬牙，抱着女儿，带着其他人退到楼道拐角。</p>
-            <p>"清雪。"秦烈转头看向身边的女人，"准备好了吗？"</p>
-            <p>苏清雪点点头，冰蓝色的眼眸里闪烁着坚定的光芒。</p>
-            <p>经过昨晚的觉醒和今天的实战，她已经不再是那个只会躲在办公室里的女总裁。</p>
-            <p>她是秦烈的女人，是这支队伍的副队长。</p>
-            <p>"一起上。"秦烈说，"我主攻，你辅助。"</p>
-            <p>"好。"</p>
-            <p>两人同时冲出！</p>
-            <p>秦烈如猎豹般扑向二阶精英，手枪对准它的头部，连开三枪！</p>
-            <p>砰！砰！砰！</p>
-            <p>子弹击中目标，但只打穿了它的皮肤，嵌进了肌肉里。</p>
-            <p>"吼——！"</p>
-            <p>二阶精英发出一声震耳欲聋的咆哮，猛地转身，血红的眼睛锁定了秦烈。</p>
-            <p>它抬起手臂，一拳砸向地面！</p>
-            <p>轰！</p>
-            <p>水泥地面瞬间龟裂，冲击波向四周扩散！秦烈侧身闪避，但还是被余波震得后退了两步。</p>
-            <p>"好强的力量！"他心中一凛。</p>
-            <p>二阶和一阶，完全是两个概念。</p>
-            <p>"秦烈，小心！"苏清雪突然喊道。</p>
-            <p>秦烈抬头，只见二阶精英已经冲到他面前，巨大的拳头带着风声砸下！</p>
-            <p>他来不及闪避，只能举起手臂格挡。</p>
-            <p>砰！</p>
-            <p>秦烈整个人被砸飞出去，撞在墙上，吐出一口鲜血。</p>
-            <p>【受到重创，生命值：72%】</p>
-            <p>"秦烈！"苏清雪尖叫一声，双眼瞬间变得通红。</p>
-            <p>她双手猛地推出，冰蓝色的能量如潮水般爆发！</p>
-            <p>"冻结吧！"</p>
-            <p>寒气席卷全场！</p>
-            <p>二阶精英的动作瞬间迟缓，身上开始结冰。虽然只是薄薄的一层，但足以让它动作变慢。</p>
-            <p>秦烈擦掉嘴角的血，站了起来。</p>
-            <p>他的眼神，比刚才更冷了。</p>
-            <p>"清雪，继续冻结它。"他说，"我找机会秒杀。"</p>
-            <p>"好！"苏清雪双手不停，源源不断地释放冰霜能量。</p>
-            <p>二阶精英身上的冰层越来越厚，动作也越来越慢。</p>
-            <p>但它毕竟是二阶强者，怒吼一声，浑身肌肉膨胀，竟然硬生生震碎了冰层！</p>
-            <p>"没用的！"它发出沙哑的人声，"你们这些蝼蚁，根本伤不到我！"</p>
-            <p>秦烈眼睛一眯："你会说话？"</p>
-            <p>"哈哈哈！"二阶精英狂笑，"你以为只有你们人类能觉醒？我们堕落者，也在进化！"</p>
-            <p>它猛地看向秦烈："你的基因……很美味。吞噬了你，我就能突破到三阶！"</p>
-            <p>话音未落，它再次冲来！</p>
-            <p>秦烈深吸一口气，体内那股一直压抑的能量，开始涌动。</p>
-            <p>他的右手，开始闪烁蓝色的电弧。</p>
-            <p>噼啪！噼啪！</p>
-            <p>电弧越来越密集，最终汇聚成一道雷光，缠绕在他的手臂上。</p>
-            <p>"雷霆……"秦烈低声说，"破甲！"</p>
-            <p>他猛地冲出，右拳带着雷霆之力，狠狠砸向二阶精英的胸口！</p>
-            <p>轰——！</p>
-            <p>雷光炸裂！</p>
-            <p>二阶精英的胸口被轰出一个大洞，焦黑的肌肉冒着青烟，心脏位置已经碳化！</p>
-            <p>"怎……怎么可能……"二阶精英瞪大眼睛，难以置信地看着胸口的洞。</p>
-            <p>它缓缓倒下，重重砸在地上。</p>
-            <div class="system-msg">【击杀二阶堕落者精英，获得进化点：100】<br>【触发越阶挑战奖励，进化点 +50】<br>【当前进化点：145】<br>【基因锁进度：45/100】</div>
-            <p>秦烈喘着粗气，单膝跪地。</p>
-            <p>刚才那一击，几乎耗尽了他的体力。</p>
-            <p>"秦烈！"苏清雪冲过来，扶住他，"你怎么样？"</p>
-            <p>"没事。"秦烈摇摇头，"只是脱力了。"</p>
-            <p>苏清雪眼眶一红，紧紧抱住他："你吓死我了……"</p>
-            <p>秦烈拍了拍她的背，看向其他人："过来，搜索这层楼。"</p>
-            <p>赵明等人从拐角处走出来，看着地上的二阶精英尸体，都是满脸震撼。</p>
-            <p>"秦哥，你……你太厉害了……"周凯喃喃自语。</p>
-            <p>"这就是二阶的实力。"秦烈说，"我们还需要变得更强。"</p>
-            <p>他看向赵明："赵明，试试你的治愈能力。"</p>
-            <p>"好！"赵明上前，双手按在秦烈背上。</p>
-            <p>柔和的白色光芒亮起，秦烈感觉一股暖流涌入体内，疲劳感迅速消退。</p>
-            <p>【受到治疗，恢复生命值：15%】<br>【体力恢复速度 +20%】</p>
-            <p>"不错。"秦烈站起身，"继续搜索，看看有没有遗漏的东西。"</p>
-            <p>众人开始搜索 20 层。</p>
-            <p>这层楼面积很大，除了设备间，还有几个小房间。在一个上锁的房间里，他们发现了一个保险箱。</p>
-            <p>"秦哥，这个！"林小雨喊道。</p>
-            <p>秦烈走过去，检查了一下保险箱："退后。"</p>
-            <p>他掏出手枪，对准锁芯开了一枪。</p>
-            <p>砰！</p>
-            <p>保险箱弹开。</p>
-            <p>里面放着一叠文件，还有一支黑色的药剂。</p>
-            <p>秦烈拿起文件，快速浏览。</p>
-            <p>"这是……"他眼睛一亮，"基因药剂的研究报告？"</p>
-            <p>文件上详细记录了基因药剂的配方、制作工艺，以及……副作用。</p>
-            <p>"红雨不是意外。"秦烈脸色阴沉，"是人为的。"</p>
-            <p>苏清雪凑过来看："什么意思？"</p>
-            <p>"有人故意释放了这种病毒。"秦烈说，"目的……可能是筛选。"</p>
-            <p>"筛选？"</p>
-            <p>"筛选出基因优秀的人。"秦烈说，"活下来的，都是精英。"</p>
-            <p>众人沉默了。</p>
-            <p>这个真相，比他们想象的更可怕。</p>
-            <p>"这支药剂是什么？"苏清雪拿起那支黑色药剂。</p>
-            <div class="system-msg">【检测到特殊物品】<br>【名称：基因突破液（二阶）】<br>【效果：可直接突破到二阶基因锁】<br>【副作用：5% 概率基因崩溃】<br>【建议：宿主使用】</div>
-            <p>秦烈接过药剂，看着里面黑色的液体。</p>
-            <p>"这是突破到二阶的药剂。"他说。</p>
-            <p>"你要用吗？"苏清雪紧张地问，"可是有 5% 的概率……"</p>
-            <p>"5% 不高。"秦烈拔掉瓶塞，一饮而尽。</p>
-            <p>"秦烈！"苏清雪惊呼。</p>
-            <p>下一秒，秦烈浑身剧颤！</p>
-            <p>比之前赵明觉醒时更强烈的能量波动，以他为中心爆发开来！</p>
-            <p>他的皮肤下，有什么东西在疯狂游走，像是无数条雷电。蓝色的电弧在他体表跳跃，发出噼啪的爆裂声。</p>
-            <p>"啊——！"秦烈发出一声低吼，双膝跪地。</p>
-            <p>太疼了。</p>
-            <p>比之前任何一次受伤都疼。</p>
-            <p>像是全身的每一个细胞都在被撕裂，然后重组。</p>
-            <p>"秦烈！"苏清雪想要上前，被赵明拦住。</p>
-            <p>"别碰他！"赵明说，"他现在能量不稳定，靠近会被电击！"</p>
-            <p>苏清雪急得直掉眼泪，却不敢上前。</p>
-            <p>秦烈跪在地上，浑身被电弧包裹。</p>
-            <p>他的意识开始模糊，仿佛看到了无数画面——</p>
-            <p>红雨降临的瞬间。<br>堕落者撕咬的场景。<br>还有……一个巨大的实验室，里面站着几个穿白大褂的人，正在观察着什么。</p>
-            <p>"记住……"一个声音在他脑海中响起，"这一切，才刚刚开始……"</p>
-            <p>轰——！</p>
-            <p>一股强大的能量波动爆发开来！</p>
-            <p>秦烈缓缓站起身，眼中的蓝色电弧渐渐平息。</p>
-            <p>但他的气息，已经完全不同了。</p>
-            <p>更强，更冷，更……危险。</p>
-            <div class="system-msg">【基因突破成功】<br>【当前状态：二阶基因锁（掌控者）】<br>【异能升级：雷霆掌控（中阶）】<br>【解锁新能力：雷电外放、电磁感应】<br>【全属性 +50%】</div>
-            <p>秦烈握了握拳，感受着体内澎湃的力量。</p>
-            <p>"二阶……"他喃喃自语，"原来这就是二阶的力量。"</p>
-            <p>他抬起手，掌心向上。</p>
-            <p>噼啪！</p>
-            <p>一道手臂粗的雷电从他掌心射出，击中远处的墙壁，留下一个焦黑的洞！</p>
-            <p>"好强……"周凯看得目瞪口呆。</p>
-            <p>"这就是二阶的实力。"秦烈收回手，"但这还不够。"</p>
-            <p>他看向窗外。</p>
-            <p>远处的城市里，还有无数堕落者在游荡。</p>
-            <p>而在那之中，恐怕还有更多更强的存在。</p>
-            <p>三阶、四阶、甚至更高……</p>
-            <p>"我们还需要变得更强。"秦烈说，"这栋楼只是起点。"</p>
-            <p>他转身看向众人："从今天开始，训练。我会教你们战斗技巧，赵明负责医疗训练，清雪负责异能指导。"</p>
-            <p>"是！"众人齐声应道。</p>
-            <p>"还有。"秦烈看向周凯和林小雨，"你们两个，研究这些文件。看看能不能破解基因药剂的配方。"</p>
-            <p>"明白！"两人接过文件，眼中闪烁着兴奋的光芒。</p>
-            <p>秦烈点点头，走到窗边。</p>
-            <p>窗外，红雨还在下。</p>
-            <p>但他知道，这场雨，终有一天会停。</p>
-            <p>而到那时，站在新世界顶端的，一定是他。</p>
-            <p>"秦烈。"苏清雪走到他身后，轻轻抱住他的腰，"不管未来怎样，我都会陪着你。"</p>
-            <p>秦烈握住她的手，没有说话。</p>
-            <p>但那只手，很紧，很暖。</p>
-            <p style="text-align: center; color: #999; margin-top: 30px;">（第五章完）</p>
+        <div id="chapter-content">
+            <div class="loading">📖 点击章节开始阅读</div>
         </div>
 
         <footer>
             <p>《末日进化：基因王座》© 2026</p>
-            <p>创作中，敬请期待后续章节</p>
-            <p style="margin-top: 10px;">最后更新：2026-03-21 | 累计字数：~19,000</p>
+            <p>GitHub Pages 自动渲染 | 章节内容实时更新</p>
+            <p style="margin-top: 10px;" id="update-time">最后更新：加载中...</p>
         </footer>
     </div>
+
+    <script>
+        // 章节配置 - 每次新增章节时在这里添加
+        const chapters = [
+            { id: 1, file: 'chapters/001-红雨之夜.md', title: '第一章：红雨之夜，她敲开了我的门' },
+            { id: 2, file: 'chapters/002-雷霆觉醒.md', title: '第二章：雷霆觉醒，她的身体在发光' },
+            { id: 3, file: 'chapters/003-杀戮开始.md', title: '第三章：杀戮开始，这栋楼里还有活人' },
+            { id: 4, file: 'chapters/004-基因药剂.md', title: '第四章：基因药剂，她的第一次主动' },
+            { id: 5, file: 'chapters/005-二阶精英.md', title: '第五章：二阶精英，嗜血的快感' },
+            { id: 6, file: 'chapters/006-基地建立.md', title: '第六章：基地建立，训练与暧昧的日常' }
+        ];
+
+        // 渲染目录
+        function renderChapterList() {
+            const listEl = document.getElementById('chapter-list-content');
+            listEl.innerHTML = chapters.map(ch => `
+                <li>
+                    <a onclick="loadChapter(${ch.id})">${ch.title}</a>
+                    <div class="meta">点击加载章节内容</div>
+                </li>
+            `).join('');
+        }
+
+        // 加载章节
+        async function loadChapter(id) {
+            const chapter = chapters.find(c => c.id === id);
+            if (!chapter) return;
+
+            const contentEl = document.getElementById('chapter-content');
+            contentEl.innerHTML = '<div class="loading">📖 加载中...</div>';
+
+            // 滚动到章节位置
+            setTimeout(() => {
+                contentEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+
+            try {
+                const response = await fetch(chapter.file);
+                if (!response.ok) throw new Error('加载失败');
+                const markdown = await response.text();
+                
+                // 解析 Markdown
+                const html = marked.parse(markdown);
+                
+                // 渲染章节
+                contentEl.innerHTML = `
+                    <div class="chapter active">
+                        <h2>${chapter.title}</h2>
+                        ${html}
+                        <div class="chapter-nav">
+                            <a href="#" class="${id === 1 ? 'disabled' : ''}" onclick="loadChapter(${id - 1}); return false;">← 上一章</a>
+                            <a href="#" onclick="renderChapterList(); document.getElementById('chapter-content').innerHTML = '<div class=\"loading\">📖 点击章节开始阅读</div>'; return false;">返回目录</a>
+                            <a href="#" class="${id === chapters.length ? 'disabled' : ''}" onclick="loadChapter(${id + 1}); return false;">下一章 →</a>
+                        </div>
+                    </div>
+                `;
+            } catch (error) {
+                contentEl.innerHTML = `<div class="error">❌ 加载失败：${error.message}</div>`;
+            }
+        }
+
+        // 获取最后更新时间
+        async function fetchUpdateTime() {
+            try {
+                const response = await fetch('chapters/');
+                if (response.ok) {
+                    const lastModified = response.headers.get('Last-Modified');
+                    if (lastModified) {
+                        document.getElementById('update-time').textContent = '最后更新：' + new Date(lastModified).toLocaleString('zh-CN');
+                    }
+                }
+            } catch (e) {
+                // 忽略错误
+            }
+        }
+
+        // 初始化
+        renderChapterList();
+        fetchUpdateTime();
+
+        // 支持 URL 参数直接跳转章节
+        const urlParams = new URLSearchParams(window.location.search);
+        const chapterId = urlParams.get('chapter');
+        if (chapterId) {
+            loadChapter(parseInt(chapterId));
+        }
+    </script>
 </body>
 </html>
