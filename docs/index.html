@@ -425,7 +425,7 @@ body.font-large{font-size:var(--font-large)}
 <script>
 // ===============================================================
 //  示例章节数据 — 构建脚本未运行时使用，双击即可预览
-//  运行 build.sh 后会加载外部 章节列表.js 覆盖此数据
+//  运行 build.sh 后会加载外部 chapter-list.js 覆盖此数据
 // ===============================================================
 var SAMPLE_CHAPTERS = {
   title: '《示例小说·浮生记》',
@@ -585,7 +585,7 @@ var SAMPLE_CONTENT = {
   function loadChapterData() {
     return new Promise(function(resolve) {
       var script = document.createElement('script');
-      script.src = '章节列表.js';
+      script.src = 'chapter-list.js';
       script.onload = function() {
         if (typeof CHAPTER_LIST !== 'undefined' && CHAPTER_LIST && CHAPTER_LIST.volumes && CHAPTER_LIST.volumes.length > 0) {
           resolve(CHAPTER_LIST);
