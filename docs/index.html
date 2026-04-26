@@ -365,11 +365,11 @@ body.font-large{font-size:var(--font-large)}
 
 <!-- ============ Toolbar ============ -->
 <header id="toolbar">
-  <button class="menu-btn" id="menuToggle" aria-label="目录" title="目录">☰</button>
+  <button class="menu-btn" id="menuToggle" aria-label="目录" title="目录">≡</button>
   <span id="book-title">小说阅读站</span>
   <div class="toolbar-actions">
     <button id="font-size-btn" title="字号调节" aria-label="字号">Aa</button>
-    <button id="themeToggle" title="深色模式" aria-label="切换主题">🌙</button>
+    <button id="themeToggle" title="深色模式" aria-label="切换主题">暗</button>
   </div>
 </header>
 
@@ -383,7 +383,7 @@ body.font-large{font-size:var(--font-large)}
 <div id="overlay"></div>
 
 <!-- ============ Mobile TOC button ============ -->
-<button id="mobile-toc-btn" aria-label="打开目录" title="目录">📖</button>
+<button id="mobile-toc-btn" aria-label="打开目录" title="目录">目录</button>
 
 <!-- ============ Main content ============ -->
 <main id="main">
@@ -391,9 +391,9 @@ body.font-large{font-size:var(--font-large)}
     <div id="chapter-title"></div>
 
     <div class="chapter-nav" id="chapter-nav-top">
-      <button id="prevBtn" aria-label="上一章">⬅ 上一章</button>
+      <button id="prevBtn" aria-label="上一章">← 上一章</button>
       <span class="nav-right"></span>
-      <button id="nextBtn" aria-label="下一章">下一章 ➡</button>
+      <button id="nextBtn" aria-label="下一章">下一章 →</button>
     </div>
 
     <div id="chapter-content">
@@ -407,7 +407,7 @@ body.font-large{font-size:var(--font-large)}
     <div id="bottom-sentinel"></div>
 
     <div id="chapter-nav-bottom">
-      <button id="bottomNextBtn">下一章 ➡</button>
+      <button id="bottomNextBtn">下一章 →</button>
     </div>
   </article>
 </main>
@@ -687,7 +687,7 @@ var SAMPLE_CONTENT = {
     el.prevBtn.disabled = !pn.prev;
     el.nextBtn.disabled = !pn.next;
     el.bottomNextBtn.disabled = !pn.next;
-    el.bottomNextBtn.textContent = pn.next ? '下一章 ➡' : '已是最后一章';
+    el.bottomNextBtn.textContent = pn.next ? '下一章 →' : '已是最后一章';
 
     // Handle bottom nav visibility
     if (!pn.next) {
@@ -872,7 +872,7 @@ var SAMPLE_CONTENT = {
 
   function applyTheme(mode) {
     document.documentElement.setAttribute('data-theme', mode);
-    el.themeToggle.textContent = mode === 'dark' ? '☀️' : '🌙';
+    el.themeToggle.textContent = mode === 'dark' ? '亮' : '暗';
     el.themeToggle.title = mode === 'dark' ? '浅色模式' : '深色模式';
     // Update meta theme-color
     var meta = document.querySelector('meta[name="theme-color"]');
