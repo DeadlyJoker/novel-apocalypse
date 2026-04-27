@@ -418,8 +418,7 @@ body.font-large{font-size:var(--font-large)}
 </main>
 
 <!-- ============ Marked.js (CDN) ============ -->
-<script src="https://registry.npmmirror.com/marked/latest/files/lib/marked.umd.min.js"></script>
-<script>if(typeof marked==='undefined'){var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/marked/marked.min.js';document.head.appendChild(s);}</script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
 <!-- ============ 脚本 ============ -->
 <script>
@@ -711,6 +710,16 @@ var SAMPLE_CONTENT = {
     loadChapterContent(chapter).then(function(md) {
       if (md) {
         el.content.innerHTML = renderMarkdown(md);
+      // Lazy-load marked if still missing
+      if (typeof marked === 'undefined') {
+        var s = document.createElement('script');
+        s.src = 'https://cdn.jsdelivr.net/npm/marked/marked.min.js';
+        s.onload = function() {
+          // Re-render with proper markdown
+          el.content.innerHTML = renderMarkdown(md);
+        };
+        document.head.appendChild(s);
+      }
       } else {
         el.content.innerHTML = '<div id="empty-state">⚠️ 章节内容加载失败</div>';
       }
@@ -984,7 +993,7 @@ var SAMPLE_CONTENT = {
   //  URL hash navigation (browser back/forward)
   // ============================================================
   window.addEventListener('hashchange', function() {
-    var id = window.location.hash.replace('#', '');
+    var id = decodeURIComponent(window.location.hash.replace('#', ''));
     if (id && findChapter(CHAPTER_DATA, id) && id !== currentChapterId) {
       loadChapter(id);
     }
@@ -1016,7 +1025,7 @@ var SAMPLE_CONTENT = {
       CHAPTER_IDS = buildChapterIndex(CHAPTER_DATA);
 
       // Determine initial chapter: URL hash > localStorage > first chapter
-      var hashId = window.location.hash.replace('#', '');
+      var hashId = decodeURIComponent(window.location.hash.replace('#', ''));
       var lastId = localStorage.getItem('lastChapter');
       var targetId = hashId || lastId || CHAPTER_IDS[0];
 
