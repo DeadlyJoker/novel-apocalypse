@@ -1,4 +1,5 @@
 var CHAPTER_LIST = {
+  title: '末日进化：基因王座',
   volumes: [
     {
       name: "第一卷·雷霆觉醒",
