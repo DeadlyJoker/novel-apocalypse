@@ -30,5 +30,7 @@ var CHAPTER_LIST={title:"《霓虹尘埃》",author:"苏苏工作室",volumes:[{
 {id:"Ch029",title:"第二十九章 反噬",file:"neon-dust/chapters/Ch029.md"},
 {id:"Ch030",title:"第三十章 诊所夜袭",file:"neon-dust/chapters/Ch030.md"},
 {id:"Ch031",title:"第三十一章 兄弟会据点",file:"neon-dust/chapters/Ch031.md"},
-{id:"Ch032",title:"第三十二章 改造手术（一）",file:"neon-dust/chapters/Ch032.md"}
+{id:"Ch032",title:"第三十二章 改造手术（一）",file:"neon-dust/chapters/Ch032.md"},
+{id:"Ch033",title:"第三十三章 成名的代价",file:"neon-dust/chapters/Ch033.md"},
+{id:"Ch034",title:"第三十四章 老狗的消息",file:"neon-dust/chapters/Ch034.md"}
 ]}]};
