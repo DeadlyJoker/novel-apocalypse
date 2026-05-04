@@ -29,5 +29,6 @@ var CHAPTER_LIST={title:"《霓虹尘埃》",author:"苏苏工作室",volumes:[{
 {id:"Ch028",title:"第二十八章 地面的天空",file:"chapters/Ch028.md"},
 {id:"Ch029",title:"第二十九章 反噬",file:"chapters/Ch029.md"},
 {id:"Ch030",title:"第三十章 诊所夜袭",file:"chapters/Ch030.md"},
-{id:"Ch031",title:"第三十一章 兄弟会据点",file:"chapters/Ch031.md"}
+{id:"Ch031",title:"第三十一章 兄弟会据点",file:"chapters/Ch031.md"},
+{id:"Ch032",title:"第三十二章 改造手术（一）",file:"chapters/Ch032.md"}
 ]}]};
