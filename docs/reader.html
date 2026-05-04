@@ -642,18 +642,20 @@ var SAMPLE_CONTENT = {
   //  Chapter content loading
   // ============================================================
   function loadChapterContent(chapter) {
-    // Check sample content first
-    if (typeof SAMPLE_CONTENT !== 'undefined' && SAMPLE_CONTENT[chapter.id]) {
-      return Promise.resolve(SAMPLE_CONTENT[chapter.id]);
-    }
-    // Fallback: fetch from markdown file
+    // Try to fetch from markdown file
     if (chapter.file) {
       return fetch(chapter.file)
         .then(function(r) {
           if (!r.ok) throw new Error('HTTP ' + r.status);
           return r.text();
         })
-        .catch(function() { return null; });
+        .catch(function() {
+          // Fallback to sample content if fetch fails
+          if (typeof SAMPLE_CONTENT !== 'undefined' && SAMPLE_CONTENT[chapter.id]) {
+            return SAMPLE_CONTENT[chapter.id];
+          }
+          return null;
+        });
     }
     return Promise.resolve(null);
   }
