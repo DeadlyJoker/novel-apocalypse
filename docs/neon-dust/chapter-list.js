@@ -17,7 +17,7 @@ var CHAPTER_LIST={title:"《霓虹尘埃》",author:"苏苏工作室",volumes:[{
 {id:"Ch016",title:"第十六章 半条命",file:"neon-dust/chapters/Ch016.md"},
 {id:"Ch017",title:"第十七章 三天三夜（上）",file:"neon-dust/chapters/Ch017.md"},
 {id:"Ch018",title:"第十八章 三天三夜（中）",file:"neon-dust/chapters/Ch018.md"},
-{id:"Ch019",title:"第十九章 炮火手术",file:"neon-dust/chapters/Ch019.md"},
+{id:"Ch019",title:"第十九章 炮火手术（三天三夜·下）",file:"neon-dust/chapters/Ch019.md"},
 {id:"Ch020",title:"第二十章 醒来",file:"neon-dust/chapters/Ch020.md"},
 {id:"Ch021",title:"第二十一章 灰衣",file:"neon-dust/chapters/Ch021.md"},
 {id:"Ch022",title:"第二十二章 合作协议",file:"neon-dust/chapters/Ch022.md"},
