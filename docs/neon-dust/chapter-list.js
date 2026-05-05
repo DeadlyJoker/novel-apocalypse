@@ -17,7 +17,7 @@ var CHAPTER_LIST={title:"《霓虹尘埃》",author:"苏苏工作室",volumes:[{
 {id:"Ch016",title:"第十六章 半条命",file:"neon-dust/chapters/Ch016.md"},
 {id:"Ch017",title:"第十七章 三天三夜（上）",file:"neon-dust/chapters/Ch017.md"},
 {id:"Ch018",title:"第十八章 三天三夜（中）",file:"neon-dust/chapters/Ch018.md"},
-{id:"Ch019",title:"第十九章 炮火手术（三天三夜·下）",file:"neon-dust/chapters/Ch019.md"},
+{id:"Ch019",title:"第十九章 三天三夜（下）",file:"neon-dust/chapters/Ch019.md"},
 {id:"Ch020",title:"第二十章 醒来",file:"neon-dust/chapters/Ch020.md"},
 {id:"Ch021",title:"第二十一章 灰衣",file:"neon-dust/chapters/Ch021.md"},
 {id:"Ch022",title:"第二十二章 合作协议",file:"neon-dust/chapters/Ch022.md"},
@@ -30,8 +30,8 @@ var CHAPTER_LIST={title:"《霓虹尘埃》",author:"苏苏工作室",volumes:[{
 {id:"Ch029",title:"第二十九章 反噬",file:"neon-dust/chapters/Ch029.md"},
 {id:"Ch030",title:"第三十章 诊所夜袭",file:"neon-dust/chapters/Ch030.md"},
 {id:"Ch031",title:"第三十一章 兄弟会据点",file:"neon-dust/chapters/Ch031.md"},
-{id:"Ch032",title:"第三十二章 改造手术（一）",file:"neon-dust/chapters/Ch032.md"},
+{id:"Ch032",title:"第三十二章 改造手术",file:"neon-dust/chapters/Ch032.md"},
 {id:"Ch033",title:"第三十三章 成名的代价",file:"neon-dust/chapters/Ch033.md"},
 {id:"Ch034",title:"第三十四章 老狗的消息",file:"neon-dust/chapters/Ch034.md"},
-{id:"Ch035",title:"第三十五章 改造手术（二）",file:"neon-dust/chapters/Ch035.md"}
+{id:"Ch035",title:"第三十五章 防御改造",file:"neon-dust/chapters/Ch035.md"}
 ]}]};
