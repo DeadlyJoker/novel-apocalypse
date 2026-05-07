@@ -592,7 +592,7 @@ var SAMPLE_CONTENT = {
   function loadChapterData() {
     return new Promise(function(resolve) {
       var script = document.createElement('script');
-      script.src = bookId + '/chapter-list.js';
+      script.src = bookId + '/chapter-list.js?v=' + Date.now();
       script.onload = function() {
         if (typeof CHAPTER_LIST !== 'undefined' && CHAPTER_LIST && CHAPTER_LIST.volumes && CHAPTER_LIST.volumes.length > 0) {
           resolve(CHAPTER_LIST);
