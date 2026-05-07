@@ -141,8 +141,8 @@ button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
   display:inline-block;
 }
 .volume-header .arrow.open{transform:rotate(90deg)}
-.volume-chapters{overflow:hidden;max-height:0;transition:max-height 0.3s ease}
-.volume-chapters.open{max-height:2000px}
+.volume-chapters{overflow-y:auto;max-height:0;transition:max-height 0.3s ease}
+.volume-chapters.open{max-height:none}
 
 /* Chapter item in sidebar */
 .chapter-item{
