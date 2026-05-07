@@ -75,4 +75,7 @@ var CHAPTER_LIST={title:"《霓虹尘埃》",author:"苏苏工作室",volumes:[{
 ,{id:"Ch074",title:"第七十四章 地下的春天",file:"neon-dust/chapters/Ch074.md"}
 ,{id:"Ch075",title:"第七十五章 花粉",file:"neon-dust/chapters/Ch075.md"}
 ,{id:"Ch076",title:"第七十六章 灵魂协议",file:"neon-dust/chapters/Ch076.md"}
+,{id:"Ch077",title:"第七十七章 330万",file:"neon-dust/chapters/Ch077.md"}
+,{id:"Ch078",title:"第七十八章 供体",file:"neon-dust/chapters/Ch078.md"}
+,{id:"Ch079",title:"第七十九章 手术",file:"neon-dust/chapters/Ch079.md"}
 ]}]};
