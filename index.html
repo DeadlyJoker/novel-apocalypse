@@ -1,190 +1,78 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>末日进化：基因王座</title>
-    <!-- Markdown 解析库 -->
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            line-height: 1.8;
-            color: #333;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background: #f5f5f5;
-        }
-        .container {
-            background: white;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        h1 { color: #c0392b; text-align: center; margin-bottom: 10px; font-size: 2em; }
-        .subtitle { text-align: center; color: #666; margin-bottom: 30px; font-size: 0.9em; }
-        .chapter-list { list-style: none; margin-bottom: 40px; background: #fafafa; padding: 20px; border-radius: 8px; }
-        .chapter-list li { padding: 12px 0; border-bottom: 1px solid #eee; }
-        .chapter-list li:last-child { border-bottom: none; }
-        .chapter-list a { color: #2c3e50; text-decoration: none; font-weight: 500; display: block; cursor: pointer; }
-        .chapter-list a:hover { color: #c0392b; }
-        .chapter-list .meta { font-size: 0.85em; color: #999; margin-top: 5px; }
-        .chapter { margin-top: 50px; padding-top: 30px; border-top: 3px solid #c0392b; display: none; }
-        .chapter.active { display: block; }
-        .chapter h2 { color: #2c3e50; margin-bottom: 20px; font-size: 1.5em; }
-        .chapter p { margin-bottom: 15px; text-indent: 2em; }
-        .system-msg { background: #e8f4f8; border-left: 4px solid #3498db; padding: 10px 15px; margin: 20px 0; font-family: monospace; font-size: 0.9em; border-radius: 0 4px 4px 0; }
-        .chapter-nav { display: flex; justify-content: space-between; margin: 30px 0; padding: 15px 0; border-top: 1px solid #eee; }
-        .chapter-nav a { color: #3498db; text-decoration: none; padding: 8px 16px; border-radius: 4px; }
-        .chapter-nav a:hover { background: #3498db; color: white; }
-        .chapter-nav a.disabled { color: #ccc; pointer-events: none; }
-        footer { text-align: center; margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; color: #999; font-size: 0.8em; }
-        .loading { text-align: center; padding: 40px; color: #666; }
-        .error { text-align: center; padding: 40px; color: #e74c3c; }
-        @media (max-width: 600px) { body { padding: 10px; } .container { padding: 20px; } h1 { font-size: 1.5em; } }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>苏苏工作室 · 书架</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  background:#f7f5f0;color:#333;min-height:100vh;
+}
+.container{max-width:600px;margin:0 auto;padding:40px 20px}
+h1{font-size:1.6em;font-weight:600;margin-bottom:8px;color:#1a1a1a}
+.sub{color:#999;font-size:0.9em;margin-bottom:32px}
+.book{
+  display:block;text-decoration:none;
+  background:white;border-radius:12px;padding:24px;margin-bottom:16px;
+  box-shadow:0 1px 4px rgba(0,0,0,0.06);transition:box-shadow 0.2s;
+}
+.book:hover{box-shadow:0 4px 16px rgba(0,0,0,0.1)}
+.book-title{font-size:1.15em;font-weight:600;color:#1a1a1a;margin-bottom:6px}
+.book-meta{font-size:0.85em;color:#999}
+.book-desc{font-size:0.9em;color:#666;margin-top:8px;line-height:1.6}
+.empty{text-align:center;color:#999;padding:60px 20px;font-size:0.95em}
+footer{text-align:center;color:#bbb;font-size:0.8em;padding:40px 20px}
+
+@media (prefers-color-scheme:dark){
+  body{background:#1a1a1d;color:#ddd}
+  h1{color:#eee}
+  .book{background:#252528;box-shadow:0 1px 4px rgba(0,0,0,0.2)}
+  .book:hover{box-shadow:0 4px 16px rgba(0,0,0,0.3)}
+  .book-title{color:#eee}
+  .book-desc{color:#aaa}
+}
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1>🔥 末日进化：基因王座</h1>
-        <p class="subtitle">末日题材 | 单男主多女主 | 基因进化 | 爽文</p>
-        
-        <div class="chapter-list">
-            <h3 style="margin-bottom: 15px; color: #666;">📖 章节目录</h3>
-            <div id="chapter-list-content">加载中...</div>
-        </div>
+<div class="container">
+<h1>苏苏工作室 · 书架</h1>
+<p class="sub">AI 辅助创作 · 精工细作</p>
+<div id="book-list"></div>
+</div>
+<footer>苏苏工作室 &copy; 2026</footer>
+<script>
+var BOOKS = [
+  {
+    id: "neon-dust",
+    title: "霓虹尘埃",
+    author: "苏苏工作室",
+    desc: "赛博朋克世界，底层黑市义体医生林深，为救妹妹一步步向上爬。每一步，都踩着珍视之人的碎片。",
+    chapters: 84,
+    words: "约129万字",
+    url: "reader.html?book=neon-dust"
+  },
+  {
+    id: "apocalypse",
+    title: "末日进化：基因王座",
+    author: "苏苏工作室",
+    desc: "红雨降临，基因觉醒。秦烈从废墟中崛起，一路杀上基因王座。",
+    chapters: 39,
+    words: "约43万字",
+    url: "reader.html?book=apocalypse"
+  }
+];
 
-        <div id="chapter-content">
-            <div class="loading">📖 点击章节开始阅读</div>
-        </div>
-
-        <footer>
-            <p>《末日进化：基因王座》© 2026</p>
-            <p>GitHub Pages 自动渲染 | 章节内容实时更新</p>
-            <p style="margin-top: 10px;" id="update-time">最后更新：加载中...</p>
-        </footer>
-    </div>
-
-    <script>
-        // 章节配置 - 每次新增章节时在这里添加
-        const chapters = [
-            { id: 1, file: 'chapters/001-红雨之夜.md', title: '第一章：红雨之夜，她敲开了我的门' },
-            { id: 2, file: 'chapters/002-雷霆觉醒.md', title: '第二章：雷霆觉醒，她的身体在发光' },
-            { id: 3, file: 'chapters/003-杀戮开始.md', title: '第三章：杀戮开始，这栋楼里还有活人' },
-            { id: 4, file: 'chapters/004-基因药剂.md', title: '第四章：基因药剂，她的第一次主动' },
-            { id: 5, file: 'chapters/005-基地建立.md', title: '第五章：基地建立，这栋楼我说了算' },
-            { id: 6, file: 'chapters/006-基地建立-完整版.md', title: '第六章：基地建立，训练与暧昧的日常' },
-            { id: 7, file: 'chapters/007-尸潮来袭.md', title: '第七章：尸潮来袭，林小蛮的过去' },
-            { id: 8, file: 'chapters/008-叶红鲤觉醒.md', title: '第八章：叶红鲤觉醒，火辣女战神的初遇' },
-            { id: 9, file: 'chapters/009-白灵登场.md', title: '第九章：白灵登场，温柔医仙的救赎' },
-            { id: 10, file: 'chapters/010-江城统一.md', title: '第十章：江城统一，幸存者联盟成立' },
-            { id: 11, file: 'chapters/011-神秘组织.md', title: '第十一章：神秘组织，姬无双登场' },
-            { id: 12, file: 'chapters/012-凯旋江城.md', title: '第十二章：凯旋江城，姬无双的秘密' },
-            { id: 13, file: 'chapters/013-风暴前夕.md', title: '第十三章：风暴前夕，神秘来客' },
-            { id: 14, file: 'chapters/014-风暴降临.md', title: '第十四章：风暴降临，基因猎手' },
-            { id: 15, file: 'chapters/015-小蛮失踪.md', title: '第十五章：小蛮失踪，暗流涌动' },
-            { id: 16, file: 'chapters/016-创世真相.md', title: '第十六章：创世真相，主的存在' },
-            { id: 17, file: 'chapters/017-南海邀请.md', title: '第十七章：南海邀请，王者争霸' },
-            { id: 18, file: 'chapters/018-西荒故人.md', title: '第十八章：西荒故人，影楼杀机' },
-            { id: 19, file: 'chapters/019-王者争霸.md', title: '第十九章：王者争霸，故人重逢' },
-            { id: 20, file: 'chapters/020-竞技场首战.md', title: '第二十章：竞技场首战，一招秒杀' },
-            { id: 21, file: 'chapters/021-竞技场连胜.md', title: '第二十一章：竞技场连胜，老怪物登场' },
-            { id: 22, file: 'chapters/022-循环赛碾压.md', title: '第二十二章：循环赛碾压，强势晋级' },
-            { id: 23, file: 'chapters/023-决赛开启.md', title: '第二十三章：决赛开启，老怪物登场' },
-            { id: 24, file: 'chapters/024-王者加冕.md', title: '第二十四章：王者加冕，新的征程' },
-            { id: 25, file: 'chapters/025-神之遗迹.md', title: '第二十五章：神之遗迹，基因迷宫' },
-            { id: 26, file: 'chapters/026-遗迹核心.md', title: '第二十六章：遗迹核心，神秘传承' },
-            { id: 27, file: 'chapters/027-回归江城.md', title: '第二十七章：回归江城，禁区筹备' },
-            { id: 28, file: 'chapters/028-北境冰原.md', title: '第二十八章：北境冰原，极寒试炼' },
-            { id: 29, file: 'chapters/029-南海孤岛.md', title: '第二十九章：南海孤岛，海神之泪' },
-            { id: 30, file: 'chapters/030-江城风云.md', title: '第三十章：江城风云，秦家来袭' },
-            { id: 31, file: 'chapters/031-京城暗涌.md', title: '第三十一章：京城暗涌，苏家往事' },
-            { id: 32, file: 'chapters/032-决战京城.md', title: '第三十二章：决战京城，父子对峙' },
-            { id: 33, file: 'chapters/033-双父之谜.md', title: '第三十三章：双父之谜，真相大白' },
-            { id: 34, file: 'chapters/034-陨石坑红雨源头.md', title: '第三十四章：陨石坑，红雨源头' },
-            { id: 35, file: 'chapters/035-弑神之战.md', title: '第三十五章：弑神之战（上）' },
-            { id: 36, file: 'chapters/036-弑神之战（下）.md', title: '第三十六章：弑神之战（下）' },
-            { id: 37, file: 'chapters/037-月球基地.md', title: '第三十七章：月球基地' },
-            { id: 38, file: 'chapters/038-最终真相.md', title: '第三十八章：最终真相' },
-            { id: 39, file: 'chapters/039-尾声·新的时代.md', title: '第三十九章：尾声·新的时代' }
-        ];
-
-        // 渲染目录
-        function renderChapterList() {
-            const listEl = document.getElementById('chapter-list-content');
-            listEl.innerHTML = chapters.map(ch => `
-                <li>
-                    <a onclick="loadChapter(${ch.id})">${ch.title}</a>
-                    <div class="meta">点击加载章节内容</div>
-                </li>
-            `).join('');
-        }
-
-        // 加载章节
-        async function loadChapter(id) {
-            const chapter = chapters.find(c => c.id === id);
-            if (!chapter) return;
-
-            const contentEl = document.getElementById('chapter-content');
-            contentEl.innerHTML = '<div class="loading">📖 加载中...</div>';
-
-            // 滚动到章节位置
-            setTimeout(() => {
-                contentEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 100);
-
-            try {
-                const response = await fetch(chapter.file);
-                if (!response.ok) throw new Error('加载失败');
-                const markdown = await response.text();
-                
-                // 解析 Markdown
-                const html = marked.parse(markdown);
-                
-                // 渲染章节
-                contentEl.innerHTML = `
-                    <div class="chapter active">
-                        <h2>${chapter.title}</h2>
-                        ${html}
-                        <div class="chapter-nav">
-                            <a href="#" class="${id === 1 ? 'disabled' : ''}" onclick="loadChapter(${id - 1}); return false;">← 上一章</a>
-                            <a href="#" onclick="renderChapterList(); document.getElementById('chapter-content').innerHTML = '<div class=\"loading\">📖 点击章节开始阅读</div>'; return false;">返回目录</a>
-                            <a href="#" class="${id === chapters.length ? 'disabled' : ''}" onclick="loadChapter(${id + 1}); return false;">下一章 →</a>
-                        </div>
-                    </div>
-                `;
-            } catch (error) {
-                contentEl.innerHTML = `<div class="error">❌ 加载失败：${error.message}</div>`;
-            }
-        }
-
-        // 获取最后更新时间
-        async function fetchUpdateTime() {
-            try {
-                const response = await fetch('chapters/');
-                if (response.ok) {
-                    const lastModified = response.headers.get('Last-Modified');
-                    if (lastModified) {
-                        document.getElementById('update-time').textContent = '最后更新：' + new Date(lastModified).toLocaleString('zh-CN');
-                    }
-                }
-            } catch (e) {
-                // 忽略错误
-            }
-        }
-
-        // 初始化
-        renderChapterList();
-        fetchUpdateTime();
-
-        // 支持 URL 参数直接跳转章节
-        const urlParams = new URLSearchParams(window.location.search);
-        const chapterId = urlParams.get('chapter');
-        if (chapterId) {
-            loadChapter(parseInt(chapterId));
-        }
-    </script>
+var html = '';
+BOOKS.forEach(function(b){
+  html += '<a class="book" href="'+b.url+'">';
+  html += '<div class="book-title">'+b.title+'</div>';
+  html += '<div class="book-meta">'+b.chapters+'章 · '+b.words+' · '+b.author+'</div>';
+  html += '<div class="book-desc">'+b.desc+'</div>';
+  html += '</a>';
+});
+document.getElementById('book-list').innerHTML = html || '<div class="empty">书架上还没有书</div>';
+</script>
 </body>
 </html>
