@@ -4,57 +4,63 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>阅读 · 苏苏工作室</title>
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#f7f5f0;--card:#fff;--text:#333;--dim:#999;--accent:#8b5e3c;--border:#eeebe6;--sidebar-w:300px;--radius:10px}
+:root{
+  --bg:#f7f5f0;--card:#fff;--text:#333;--dim:#999;
+  --accent:#8b5e3c;--border:#eeebe6;--sidebar-w:280px;--toolbar-h:44px
+}
 body{
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
   background:var(--bg);color:var(--text);height:100vh;overflow:hidden;
 }
 
-/* ===== Layout ===== */
-.app{display:flex;height:100vh}
+/* Layout */
+.app{display:flex;height:100vh;position:relative}
+
 /* Sidebar */
 .sidebar{
   width:var(--sidebar-w);background:var(--card);border-right:1px solid var(--border);
-  display:flex;flex-direction:column;overflow:hidden;flex-shrink:0;z-index:10;
+  display:flex;flex-direction:column;overflow:hidden;flex-shrink:0;transition:margin-left 0.2s ease;z-index:20;
 }
-.sidebar-header{padding:16px 18px 12px;border-bottom:none}
-.sidebar-header h1{font-size:1em;font-weight:600;color:#1a1a1a;margin-bottom:2px}
-.sidebar-header .sub{font-size:0.75em;color:var(--dim)}
-.sidebar-toggle{display:none}
-.chapter-list{flex:1;overflow-y:auto;padding:8px 0}
+.sidebar.collapsed{margin-left:calc(0px - var(--sidebar-w))}
+.sidebar-header{padding:14px 16px}
+.sidebar-header h1{font-size:0.95em;font-weight:600;color:#1a1a1a;margin-bottom:2px}
+.sidebar-header .sub{font-size:0.7em;color:var(--dim)}
+
+.chapter-list{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
 .chapter-list::-webkit-scrollbar{width:4px}
 .chapter-list::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
 
-.vol-group{margin-bottom:4px}
-.vol-title{
-  font-size:0.75em;font-weight:600;color:var(--dim);padding:12px 18px 5px;
-  letter-spacing:1px;
-}
-.ch-item{
-  display:flex;align-items:center;padding:7px 18px;cursor:pointer;font-size:0.85em;
-  transition:all 0.12s;color:var(--text);
-}
-.ch-item:hover{background:#faf7f3}
-.ch-item.active{background:#f5f0eb;font-weight:500;color:#1a1a1a}
-.ch-item .badge{font-size:0.65em;color:#e74c3c;font-weight:600;margin-left:6px}
+.vol-group{margin-bottom:2px}
+.vol-title{font-size:0.72em;font-weight:600;color:var(--dim);padding:12px 16px 5px;letter-spacing:1px}
+.ch-item{padding:7px 16px;cursor:pointer;font-size:0.84em;transition:background 0.12s;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ch-item:hover{background:var(--bg)}
+.ch-item.active{background:var(--bg);font-weight:500;color:#1a1a1a}
+.ch-item .badge{font-size:0.65em;color:#e74c3c;font-weight:600;margin-left:4px}
 
 /* Main */
 .main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
-.toolbar{
-  display:flex;align-items:center;padding:10px 20px;
-  background:var(--card);flex-shrink:0;
-}
-.menu-btn{display:none;background:none;border:none;font-size:1.1em;cursor:pointer;color:var(--dim);padding:4px 8px;margin-right:8px}
-.menu-btn:hover{color:var(--text)}
-.toolbar-title{font-size:0.85em;color:var(--dim)}
-.toolbar-title strong{color:var(--text)}
 
-.reader-area{flex:1;overflow-y:auto;padding:24px 32px 60px;max-width:800px;margin:0 auto;width:100%}
-.reader-area::-webkit-scrollbar{width:4px}
-.reader-area::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+/* Toolbar */
+.toolbar{
+  display:flex;align-items:center;height:var(--toolbar-h);padding:0 14px;
+  background:var(--card);gap:8px;flex-shrink:0;
+}
+.tb-btn{
+  background:none;border:none;color:var(--dim);cursor:pointer;font-size:0.82em;
+  padding:4px 10px;border-radius:5px;transition:all 0.12s;text-decoration:none;
+  display:inline-flex;align-items:center;gap:3px;flex-shrink:0;
+}
+.tb-btn:hover{background:var(--bg);color:var(--text)}
+.tb-btn.active{color:var(--accent)}
+.tb-spacer{flex:1}
+.tb-title{font-size:0.85em;color:var(--dim);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.tb-title strong{color:var(--text)}
+
+/* Reader */
+.reader-area{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.reader-area-inner{max-width:760px;margin:0 auto;padding:24px 28px 100px}
 
 .reader-placeholder{
   display:flex;flex-direction:column;align-items:center;justify-content:center;
@@ -63,47 +69,62 @@ body{
 
 .chapter-content{line-height:2;font-size:1em;animation:fadeIn 0.25s ease}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.chapter-content h2{font-size:1.15em;color:#1a1a1a;margin-bottom:24px;padding-bottom:10px;border-bottom:1px solid #eeebe6}
+.chapter-content h2{font-size:1.15em;color:#1a1a1a;margin-bottom:24px}
 .chapter-content p{margin-bottom:1em;text-indent:2em}
 .chapter-content h3{font-size:1.05em;color:#1a1a1a;margin:1.5em 0 0.8em}
 .chapter-content blockquote{
   border-left:3px solid var(--accent);padding:8px 14px;margin:1em 0;
-  background:#faf7f3;border-radius:0 6px 6px 0;color:#555;font-size:0.95em;
+  background:var(--bg);border-radius:0 6px 6px 0;color:#555;font-size:0.95em;
 }
-.chapter-content code{background:#f5f0eb;padding:1px 5px;border-radius:3px;font-size:0.9em;color:var(--accent)}
+.chapter-content code{background:var(--bg);padding:1px 5px;border-radius:3px;font-size:0.9em;color:var(--accent)}
 .chapter-content hr{border:none;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:2em 0}
-.chapter-content pre{background:#faf7f3;padding:14px;border-radius:8px;overflow-x:auto;margin:1em 0;font-size:0.9em;border:1px solid var(--border)}
-.reader-nav{margin-top:24px;display:flex;justify-content:space-between}
-.reader-nav a{
-  padding:6px 16px;background:var(--card);border:1px solid var(--border);
-  border-radius:6px;text-decoration:none;color:#555;font-size:0.8em;transition:all 0.12s;
+.chapter-content pre{background:var(--bg);padding:14px;border-radius:8px;overflow-x:auto;margin:1em 0;font-size:0.9em;border:1px solid var(--border)}
+
+/* Bottom nav */
+.bottom-nav{
+  display:flex;justify-content:space-between;margin-top:32px;padding-top:16px;
 }
-.reader-nav a:hover{background:var(--bg)}
-.reader-nav a.disabled{opacity:0.25;pointer-events:none}
+.bottom-nav a{
+  padding:8px 20px;background:var(--card);border-radius:8px;
+  text-decoration:none;color:#555;font-size:0.82em;transition:all 0.12s;
+}
+.bottom-nav a:hover{background:#e8ddd0;color:#333}
+.bottom-nav a.disabled{opacity:0.25;pointer-events:none}
+
+/* Floating chapter nav */
+.floating-nav{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%);display:flex;
+  gap:6px;z-index:30;background:var(--card);
+  padding:6px 14px;border-radius:20px;box-shadow:0 2px 12px rgba(0,0,0,0.08);
+}
+.floating-nav button{
+  background:none;border:none;color:var(--dim);cursor:pointer;padding:6px 14px;
+  border-radius:14px;font-size:0.8em;transition:all 0.12s;
+}
+.floating-nav button:hover{background:var(--bg);color:var(--text)}
+.floating-nav button:disabled{opacity:0.25;pointer-events:none}
+.floating-nav .nav-title{font-size:0.78em;color:var(--dim);padding:6px 4px}
 
 .loading{text-align:center;padding:60px;color:var(--dim);font-size:0.9em}
 .error{text-align:center;padding:40px;color:#c0392b;font-size:0.9em}
 
-/* Mobile */
+/* Overlay */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.2);z-index:15}
+
 @media(max-width:768px){
-  .sidebar{position:fixed;left:-300px;top:0;height:100%;transition:left 0.25s ease;z-index:100}
-  .sidebar.open{left:0}
-  .sidebar.open + .overlay{display:block}
-  .menu-btn{display:block}
-  .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.3);z-index:90}
-  .reader-area{padding:16px 18px 40px}
-  .sidebar-toggle{display:block;position:absolute;top:12px;right:12px;background:none;border:none;font-size:1.2em;color:var(--dim);cursor:pointer}
+  .sidebar{position:fixed;left:0;top:0;height:100%;z-index:25;transition:transform 0.25s ease}
+  .sidebar.collapsed{transform:translateX(-100%);margin-left:0}
+  .overlay.show{display:block}
+  .reader-area-inner{padding:16px 16px 120px}
+  .floating-nav{left:8px;right:8px;transform:none;justify-content:space-between;border-radius:16px}
 }
 </style>
 </head>
 <body>
 <div class="app">
-  <!-- 遮罩（移动端） -->
-  <div class="overlay" onclick="closeSidebar()"></div>
+  <div class="overlay" id="overlay"></div>
   
-  <!-- 侧边栏 -->
   <div class="sidebar" id="sidebar">
-    <button class="sidebar-toggle" onclick="closeSidebar()">✕</button>
     <div class="sidebar-header">
       <h1 id="book-title">加载中...</h1>
       <div class="sub" id="book-sub"></div>
@@ -113,11 +134,15 @@ body{
     </div>
   </div>
 
-  <!-- 主区域 -->
   <div class="main">
     <div class="toolbar">
-      <button class="menu-btn" onclick="toggleSidebar()">☰</button>
-      <div class="toolbar-title" id="toolbar-title">← <strong>选择章节开始阅读</strong></div>
+      <button class="tb-btn" id="btn-toc" onclick="toggleSidebar()" title="目录">☰ 目录</button>
+      <a class="tb-btn" href="./" title="返回书架">← 书架</a>
+      <span class="tb-spacer"></span>
+      <span class="tb-title" id="toolbar-title"><strong>选择章节开始阅读</strong></span>
+      <span class="tb-spacer"></span>
+      <button class="tb-btn" id="btn-prev" onclick="prevChapter()" disabled>◁</button>
+      <button class="tb-btn" id="btn-next" onclick="nextChapter()" disabled>▷</button>
     </div>
     <div class="reader-area" id="reader-area">
       <div class="reader-placeholder" id="placeholder">
@@ -126,9 +151,17 @@ body{
       </div>
     </div>
   </div>
+
+  <!-- 浮动翻页 -->
+  <div class="floating-nav" id="floating-nav" style="display:none">
+    <button onclick="prevChapter()" id="f-prev" disabled>← 上一章</button>
+    <span class="nav-title" id="f-title"></span>
+    <button onclick="nextChapter()" id="f-next" disabled>下一章 →</button>
+  </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script>
-// ===== 配置 =====
 var params = new URLSearchParams(window.location.search);
 var bookId = params.get('book') || 'neon-dust';
 
@@ -156,20 +189,19 @@ document.getElementById('book-sub').textContent = book.sub + ' · ' + book.path;
 var allChapters = [];
 var currentIdx = -1;
 
-// 章节中文名称映射
 var CHAPTER_NAMES = {
   'VOLUME-01-CHAPTER-01':'序章：新秩序','VOLUME-01-CHAPTER-02':'地下区的医生','VOLUME-01-CHAPTER-03':'血手帮的阴影',
   'VOLUME-01-CHAPTER-04':'铁牙来访','VOLUME-01-CHAPTER-05':'灰色包裹','VOLUME-01-CHAPTER-06':'地下工坊',
   'VOLUME-01-CHAPTER-07':'废城的规矩','VOLUME-01-CHAPTER-08':'灰衣的注视','VOLUME-01-CHAPTER-09':'普罗米修斯',
-  'VOLUME-01-CHAPTER-10':'第10章：断裂的连线','VOLUME-01-CHAPTER-11':'第11章：深夜访客','VOLUME-01-CHAPTER-12':'第12章：老狗坠楼',
-  'VOLUME-01-CHAPTER-13':'第13章：地下火光','VOLUME-01-CHAPTER-14':'第14章：灰衣特工','VOLUME-01-CHAPTER-15':'第15章：苏焰的任务',
-  'VOLUME-01-CHAPTER-16':'第16章：逃亡路线','VOLUME-01-CHAPTER-17':'第17章：小满的求救','VOLUME-01-CHAPTER-18':'第18章：铁牙的算盘',
+  'VOLUME-01-CHAPTER-10':'断裂的连线','VOLUME-01-CHAPTER-11':'深夜访客','VOLUME-01-CHAPTER-12':'老狗坠楼',
+  'VOLUME-01-CHAPTER-13':'地下火光','VOLUME-01-CHAPTER-14':'灰衣特工','VOLUME-01-CHAPTER-15':'苏焰的任务',
+  'VOLUME-01-CHAPTER-16':'逃亡路线','VOLUME-01-CHAPTER-17':'小满的求救','VOLUME-01-CHAPTER-18':'铁牙的算盘',
   'VOLUME-01-CHAPTER-19':'废城之战（序）','VOLUME-01-CHAPTER-20':'废城之战（起）','VOLUME-01-CHAPTER-21':'废城之战（承）',
-  'VOLUME-01-CHAPTER-22':'废城之战（转）','VOLUME-01-CHAPTER-23':'废城之战（合）','VOLUME-01-CHAPTER-24':'第24章：钢铁医生',
-  'VOLUME-01-CHAPTER-25':'第25章：地下区的清晨','VOLUME-01-CHAPTER-26':'第26章：义体工坊','VOLUME-01-CHAPTER-27':'第27章：钢钉的故事',
-  'VOLUME-01-CHAPTER-28':'第28章：苏焰的伤','VOLUME-01-CHAPTER-29':'第29章：左臂的秘密','VOLUME-01-CHAPTER-30':'第30章：王景明的回声',
-  'VOLUME-01-CHAPTER-31':'第31章：铁牙的野心','VOLUME-01-CHAPTER-32':'第32章：蛇牙会的覆灭','VOLUME-01-CHAPTER-33':'第33章：老陈的情报',
-  'VOLUME-01-CHAPTER-34':'第34章：钱爷的债','VOLUME-01-CHAPTER-35':'第35章：泰坦的灰衣','VOLUME-01-CHAPTER-36':'第36章：克莱恩的微笑',
+  'VOLUME-01-CHAPTER-22':'废城之战（转）','VOLUME-01-CHAPTER-23':'废城之战（合）','VOLUME-01-CHAPTER-24':'钢铁医生',
+  'VOLUME-01-CHAPTER-25':'地下区的清晨','VOLUME-01-CHAPTER-26':'义体工坊','VOLUME-01-CHAPTER-27':'钢钉的故事',
+  'VOLUME-01-CHAPTER-28':'苏焰的伤','VOLUME-01-CHAPTER-29':'左臂的秘密','VOLUME-01-CHAPTER-30':'王景明的回声',
+  'VOLUME-01-CHAPTER-31':'铁牙的野心','VOLUME-01-CHAPTER-32':'蛇牙会的覆灭','VOLUME-01-CHAPTER-33':'老陈的情报',
+  'VOLUME-01-CHAPTER-34':'钱爷的债','VOLUME-01-CHAPTER-35':'泰坦的灰衣','VOLUME-01-CHAPTER-36':'克莱恩的微笑',
   'VOLUME-01-CHAPTER-37':'普罗米修斯实验','VOLUME-01-CHAPTER-38':'父母的名字','VOLUME-01-CHAPTER-39':'小满的电磁',
   'VOLUME-01-CHAPTER-40':'灰衣的追击','VOLUME-01-CHAPTER-41':'苏焰的选择','VOLUME-01-CHAPTER-42':'废城的夜晚',
   'VOLUME-01-CHAPTER-43':'地下通道','VOLUME-01-CHAPTER-44':'第二地下城','VOLUME-01-CHAPTER-45':'回收者的地盘',
@@ -202,15 +234,13 @@ function getChapterName(name) {
   var key = name.replace(/\.md$/,'');
   var named = CHAPTER_NAMES[key];
   if (named) {
-    // 如果标题已经包含'第X章'或'序章'前缀，直接使用
-    if (named.match(/^(第\d+章|序章)/)) { return named; }
+    if (named.match(/^(第\d+章|序章)/)) return named;
     return '第' + key.replace(/^.*CHAPTER-/,'').replace(/^0+/,'') + '章 ' + named;
   }
-  // fallback: 从文件名提取
   return '第' + key.replace(/^.*CHAPTER-/,'').replace(/^0+/,'') + '章';
 }
 
-// ===== GitHub API =====
+// Fetch chapters
 var apiUrl = 'https://api.github.com/repos/' + book.owner + '/' + book.repo + '/contents/' + book.path;
 
 fetch(apiUrl, { headers: { 'Accept': 'application/vnd.github.v3+json' } })
@@ -220,83 +250,104 @@ fetch(apiUrl, { headers: { 'Accept': 'application/vnd.github.v3+json' } })
     document.getElementById('chapter-list').innerHTML = '<div class="error">加载失败: ' + e.message + '</div>';
   });
 
-// ===== 渲染侧边栏 =====
 function renderSidebar(files) {
   var mdFiles = files.filter(function(f) { return f.name.endsWith('.md'); });
+  var vols = {};
+  mdFiles.forEach(function(f) {
+    var vm = f.name.match(book.volPat);
+    var cm = f.name.match(book.chPat);
+    if (!vm || !cm) return;
+    var vk = 'VOLUME-' + vm[1];
+    if (!vols[vk]) vols[vk] = [];
+    vols[vk].push({ num: parseInt(cm[1]), name: f.name, url: f.download_url });
+  });
   
-  if (book.volPat) {
-    // Volume-organized
-    var vols = {};
-    mdFiles.forEach(function(f) {
-      var vm = f.name.match(book.volPat);
-      var cm = f.name.match(book.chPat);
-      if (!vm || !cm) return;
-      var vk = 'VOLUME-' + vm[1];
-      if (!vols[vk]) vols[vk] = [];
-      vols[vk].push({ num: parseInt(cm[1]), name: f.name, url: f.download_url });
+  var html = '';
+  Object.keys(vols).sort().forEach(function(vk) {
+    vols[vk].sort(function(a,b) { return a.num - b.num; });
+    html += '<div class="vol-group"><div class="vol-title">' + (book.volNames[vk] || vk) + '</div>';
+    vols[vk].forEach(function(c) {
+      var dn = getChapterName(c.name);
+      html += '<div class="ch-item" data-idx="' + allChapters.length + '" onclick="loadChapter(' + allChapters.length + ')">' + dn + '</div>';
+      allChapters.push({ url: c.url, name: dn });
     });
-    
-    var html = '';
-    var ordered = Object.keys(vols).sort();
-    ordered.forEach(function(vk) {
-      vols[vk].sort(function(a,b) { return a.num - b.num; });
-      html += '<div class="vol-group"><div class="vol-title">' + (book.volNames[vk] || vk) + '</div>';
-      vols[vk].forEach(function(c) {
-        var displayName = getChapterName(c.name);
-        html += '<div class="ch-item" data-idx="' + allChapters.length + '" onclick="loadChapter(' + allChapters.length + ')">' +
-          '<span>' + displayName + '</span></div>';
-        allChapters.push({ url: c.url, name: displayName });
-      });
-      html += '</div>';
-    });
-    document.getElementById('chapter-list').innerHTML = html;
-  }
-  
-  // Auto-load first chapter
-  if (allChapters.length > 0) {
-    loadChapter(0);
-  }
+    html += '</div>';
+  });
+  document.getElementById('chapter-list').innerHTML = html;
+  if (allChapters.length > 0) loadChapter(0);
 }
 
-// ===== 加载章节 =====
+// Load chapter
 function loadChapter(idx) {
   if (idx < 0 || idx >= allChapters.length) return;
   currentIdx = idx;
   
-  // Highlight
-  document.querySelectorAll('.ch-item').forEach(function(el, i) {
+  document.querySelectorAll('.ch-item').forEach(function(el) {
     el.classList.toggle('active', parseInt(el.getAttribute('data-idx')) === idx);
   });
   
   var ch = allChapters[idx];
   var area = document.getElementById('reader-area');
-  var placeholder = document.getElementById('placeholder');
-  if (placeholder) placeholder.style.display = 'none';
+  var ph = document.getElementById('placeholder');
+  if (ph) ph.style.display = 'none';
   area.innerHTML = '<div class="loading">加载中...</div>';
-  document.getElementById('toolbar-title').innerHTML = '← <strong>' + ch.name + '</strong>';
   
-  // Close sidebar on mobile
-  closeSidebar();
+  document.getElementById('toolbar-title').innerHTML = '<strong>' + ch.name + '</strong>';
+  
+  // 浮动导航
+  var fn = document.getElementById('floating-nav');
+  fn.style.display = 'flex';
+  document.getElementById('f-title').textContent = (idx+1) + ' / ' + allChapters.length;
+  document.getElementById('f-prev').disabled = (idx <= 0);
+  document.getElementById('f-next').disabled = (idx >= allChapters.length - 1);
+  
+  // 工具栏按钮
+  document.getElementById('btn-prev').disabled = (idx <= 0);
+  document.getElementById('btn-next').disabled = (idx >= allChapters.length - 1);
+  
+  document.getElementById('btn-toc').classList.add('active');
+  
+  // Scroll active chapter into sidebar view
+  var activeEl = document.querySelector('.ch-item.active');
+  if (activeEl) activeEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   
   fetch(ch.url).then(function(r) { return r.text(); }).then(function(md) {
     var prevBtn = idx > 0 ? '<a href="#" onclick="loadChapter(' + (idx-1) + ');return false">← 上一章</a>' : '<a class="disabled">← 上一章</a>';
     var nextBtn = idx < allChapters.length - 1 ? '<a href="#" onclick="loadChapter(' + (idx+1) + ');return false">下一章 →</a>' : '<a class="disabled">下一章 →</a>';
-    
-    area.innerHTML = '<div class="chapter-content">' +
+    area.innerHTML = '<div class="reader-area-inner"><div class="chapter-content">' +
       marked.parse(md) +
-      '<div class="reader-nav">' + prevBtn + nextBtn + '</div></div>';
+      '</div><div class="bottom-nav">' + prevBtn + nextBtn + '</div></div>';
     area.scrollTop = 0;
   }).catch(function(e) {
     area.innerHTML = '<div class="error">加载失败: ' + e.message + '</div>';
   });
 }
 
-// ===== 侧边栏切换 =====
+function prevChapter() { if (currentIdx > 0) loadChapter(currentIdx - 1); }
+function nextChapter() { if (currentIdx < allChapters.length - 1) loadChapter(currentIdx + 1); }
+
+// Sidebar toggle (works on all screen sizes)
 function toggleSidebar() {
-  document.getElementById('sidebar').classList.toggle('open');
-}
-function closeSidebar() {
-  document.getElementById('sidebar').classList.remove('open');
+  var sb = document.getElementById('sidebar');
+  var ov = document.getElementById('overlay');
+  var btn = document.getElementById('btn-toc');
+  var isDesktop = window.innerWidth > 768;
+  
+  if (isDesktop) {
+    sb.classList.toggle('collapsed');
+    btn.classList.toggle('active', !sb.classList.contains('collapsed'));
+    btn.innerHTML = sb.classList.contains('collapsed') ? '☰ 目录' : '☰ 收起';
+  } else {
+    sb.classList.toggle('collapsed');
+    ov.classList.toggle('show');
+    if (sb.classList.contains('collapsed')) {
+      btn.classList.remove('active');
+      btn.innerHTML = '☰ 目录';
+    } else {
+      btn.classList.add('active');
+      btn.innerHTML = '☰ 收起';
+    }
+  }
 }
 </script>
 </body>
