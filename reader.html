@@ -39,7 +39,6 @@ body{
 }
 .ch-item:hover{background:#faf7f3}
 .ch-item.active{background:#f5f0eb;font-weight:500;color:#1a1a1a}
-.ch-item .num{color:var(--accent);width:36px;flex-shrink:0;font-size:0.78em;font-weight:500}
 .ch-item .badge{font-size:0.65em;color:#e74c3c;font-weight:600;margin-left:6px}
 
 /* Main */
@@ -245,7 +244,7 @@ function renderSidebar(files) {
       vols[vk].forEach(function(c) {
         var displayName = getChapterName(c.name);
         html += '<div class="ch-item" data-idx="' + allChapters.length + '" onclick="loadChapter(' + allChapters.length + ')">' +
-          '<span class="num">' + c.num + '</span><span>' + displayName + '</span></div>';
+          '<span>' + displayName + '</span></div>';
         allChapters.push({ url: c.url, name: displayName });
       });
       html += '</div>';
