@@ -216,8 +216,9 @@ function loadChapter(idx) {
   
   var ch = allChapters[idx];
   var area = document.getElementById('reader-area');
+  var placeholder = document.getElementById('placeholder');
+  if (placeholder) placeholder.style.display = 'none';
   area.innerHTML = '<div class="loading">加载中...</div>';
-  document.getElementById('placeholder').style.display = 'none';
   document.getElementById('toolbar-title').innerHTML = '← <strong>' + ch.name.replace(/\.md$/,'') + '</strong>';
   
   // Close sidebar on mobile
