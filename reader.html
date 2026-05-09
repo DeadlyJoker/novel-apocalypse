@@ -7,108 +7,89 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#f7f5f0;--card:#fff;--text:#333;--dim:#999;
-  --accent:#8b5e3c;--border:#eeebe6;--sidebar-w:280px;--toolbar-h:44px
+  --bg:#f7f5f0;--card:#fff;--text:#1a1a1a;--dim:#999;--sub:#666;
+  --accent:#8b5e3c;--border:#eeebe6;--hover:#f5f0eb;
+  --sidebar-w:280px;--toolbar-h:44px;
+  --shadow:0 1px 4px rgba(0,0,0,0.06);--shadow-md:0 2px 12px rgba(0,0,0,0.08)
+}
+body.dark{
+  --bg:#1c1c1e;--card:#252528;--text:#d4d4d4;--dim:#7a7a7c;--sub:#888;
+  --accent:#c09070;--border:#333335;--hover:#2c2c30;
+  --shadow:0 1px 4px rgba(0,0,0,0.3);--shadow-md:0 2px 12px rgba(0,0,0,0.4)
 }
 body{
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
   background:var(--bg);color:var(--text);height:100vh;overflow:hidden;
+  transition:background 0.3s ease,color 0.3s ease;
 }
-
-/* Layout */
 .app{display:flex;height:100vh;position:relative}
 
 /* Sidebar */
 .sidebar{
   width:var(--sidebar-w);background:var(--card);border-right:1px solid var(--border);
-  display:flex;flex-direction:column;overflow:hidden;flex-shrink:0;transition:margin-left 0.2s ease;z-index:20;
+  display:flex;flex-direction:column;overflow:hidden;flex-shrink:0;
+  transition:margin-left 0.25s ease,transform 0.25s ease;z-index:20;
 }
 .sidebar.collapsed{margin-left:calc(0px - var(--sidebar-w))}
 .sidebar-header{padding:14px 16px}
-.sidebar-header h1{font-size:0.95em;font-weight:600;color:#1a1a1a;margin-bottom:2px}
+.sidebar-header h1{font-size:0.95em;font-weight:600;color:var(--text);margin-bottom:2px}
 .sidebar-header .sub{font-size:0.7em;color:var(--dim)}
-
 .chapter-list{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
 .chapter-list::-webkit-scrollbar{width:4px}
 .chapter-list::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
-
 .vol-group{margin-bottom:2px}
 .vol-title{font-size:0.72em;font-weight:600;color:var(--dim);padding:12px 16px 5px;letter-spacing:1px}
-.ch-item{padding:7px 16px;cursor:pointer;font-size:0.84em;transition:background 0.12s;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ch-item:hover{background:var(--bg)}
-.ch-item.active{background:var(--bg);font-weight:500;color:#1a1a1a}
-.ch-item .badge{font-size:0.65em;color:#e74c3c;font-weight:600;margin-left:4px}
+.ch-item{padding:7px 16px;cursor:pointer;font-size:0.84em;transition:background 0.12s;color:var(--sub);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ch-item:hover{background:var(--hover);color:var(--text)}
+.ch-item.active{background:var(--hover);font-weight:500;color:var(--text)}
 
 /* Main */
 .main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
 
 /* Toolbar */
-.toolbar{
-  display:flex;align-items:center;height:var(--toolbar-h);padding:0 14px;
-  background:var(--card);gap:8px;flex-shrink:0;
-}
+.toolbar{display:flex;align-items:center;height:var(--toolbar-h);padding:0 14px;background:var(--card);gap:8px;flex-shrink:0}
 .tb-btn{
-  background:none;border:none;color:var(--dim);cursor:pointer;font-size:0.82em;
+  background:none;border:none;color:var(--dim);cursor:pointer;font-size:0.8em;
   padding:4px 10px;border-radius:5px;transition:all 0.12s;text-decoration:none;
-  display:inline-flex;align-items:center;gap:3px;flex-shrink:0;
+  display:inline-flex;align-items:center;justify-content:center;gap:4px;
+  min-width:36px;height:30px;flex-shrink:0;
 }
-.tb-btn:hover{background:var(--bg);color:var(--text)}
+.tb-btn:hover{background:var(--hover);color:var(--text)}
 .tb-btn.active{color:var(--accent)}
-.tb-spacer{flex:1}
-.tb-title{font-size:0.85em;color:var(--dim);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.tb-spacer{flex:1;min-width:0}
+.tb-title{font-size:0.82em;color:var(--dim);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;text-align:center}
 .tb-title strong{color:var(--text)}
 
 /* Reader */
 .reader-area{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
 .reader-area-inner{max-width:760px;margin:0 auto;padding:24px 28px 100px}
-
-.reader-placeholder{
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  height:100%;color:var(--dim);font-size:0.9em;gap:8px;
-}
-
+.reader-area a{color:var(--accent)}
+.reader-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--dim);font-size:0.9em;gap:8px}
 .chapter-content{line-height:2;font-size:1em;animation:fadeIn 0.25s ease}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.chapter-content h2{font-size:1.15em;color:#1a1a1a;margin-bottom:24px}
+.chapter-content h2{font-size:1.15em;color:var(--text);margin-bottom:24px}
 .chapter-content p{margin-bottom:1em;text-indent:2em}
-.chapter-content h3{font-size:1.05em;color:#1a1a1a;margin:1.5em 0 0.8em}
-.chapter-content blockquote{
-  border-left:3px solid var(--accent);padding:8px 14px;margin:1em 0;
-  background:var(--bg);border-radius:0 6px 6px 0;color:#555;font-size:0.95em;
-}
+.chapter-content h3{font-size:1.05em;color:var(--text);margin:1.5em 0 0.8em}
+.chapter-content blockquote{border-left:3px solid var(--accent);padding:8px 14px;margin:1em 0;background:var(--bg);border-radius:0 6px 6px 0;color:var(--sub);font-size:0.95em}
 .chapter-content code{background:var(--bg);padding:1px 5px;border-radius:3px;font-size:0.9em;color:var(--accent)}
 .chapter-content hr{border:none;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:2em 0}
 .chapter-content pre{background:var(--bg);padding:14px;border-radius:8px;overflow-x:auto;margin:1em 0;font-size:0.9em;border:1px solid var(--border)}
 
 /* Bottom nav */
-.bottom-nav{
-  display:flex;justify-content:space-between;margin-top:32px;padding-top:16px;
-}
-.bottom-nav a{
-  padding:8px 20px;background:var(--card);border-radius:8px;
-  text-decoration:none;color:#555;font-size:0.82em;transition:all 0.12s;
-}
-.bottom-nav a:hover{background:#e8ddd0;color:#333}
-.bottom-nav a.disabled{opacity:0.25;pointer-events:none}
+.bottom-nav{display:flex;justify-content:space-between;margin-top:32px;padding-top:16px}
+.bottom-nav a{padding:8px 20px;background:var(--card);border-radius:8px;text-decoration:none;color:var(--sub);font-size:0.82em;transition:all 0.12s}
+.bottom-nav a:hover{background:var(--hover);color:var(--text)}
+.bottom-nav a.disabled{opacity:0.2;pointer-events:none}
 
-/* Floating chapter nav */
-.floating-nav{
-  position:fixed;bottom:24px;left:50%;transform:translateX(-50%);display:flex;
-  gap:6px;z-index:30;background:var(--card);
-  padding:6px 14px;border-radius:20px;box-shadow:0 2px 12px rgba(0,0,0,0.08);
-}
-.floating-nav button{
-  background:none;border:none;color:var(--dim);cursor:pointer;padding:6px 14px;
-  border-radius:14px;font-size:0.8em;transition:all 0.12s;
-}
-.floating-nav button:hover{background:var(--bg);color:var(--text)}
-.floating-nav button:disabled{opacity:0.25;pointer-events:none}
-.floating-nav .nav-title{font-size:0.78em;color:var(--dim);padding:6px 4px}
+/* Floating nav */
+.floating-nav{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:30;background:var(--card);padding:6px 14px;border-radius:20px;box-shadow:var(--shadow-md);transition:background 0.3s}
+.floating-nav button{background:none;border:none;color:var(--dim);cursor:pointer;padding:6px 14px;border-radius:14px;font-size:0.8em;transition:all 0.12s}
+.floating-nav button:hover{background:var(--hover);color:var(--text)}
+.floating-nav button:disabled{opacity:0.2;pointer-events:none}
+.floating-nav .nav-title{font-size:0.78em;color:var(--dim);padding:6px 4px;min-width:60px;text-align:center}
 
 .loading{text-align:center;padding:60px;color:var(--dim);font-size:0.9em}
 .error{text-align:center;padding:40px;color:#c0392b;font-size:0.9em}
-
-/* Overlay */
 .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.2);z-index:15}
 
 @media(max-width:768px){
@@ -136,13 +117,14 @@ body{
 
   <div class="main">
     <div class="toolbar">
-      <button class="tb-btn" id="btn-toc" onclick="toggleSidebar()" title="目录">☰ 目录</button>
-      <a class="tb-btn" href="./" title="返回书架">← 书架</a>
+      <button class="tb-btn" id="btn-toc" onclick="toggleSidebar()" title="目录">☰</button>
+      <a class="tb-btn" href="./" title="返回书架">←</a>
       <span class="tb-spacer"></span>
       <span class="tb-title" id="toolbar-title"><strong>选择章节开始阅读</strong></span>
       <span class="tb-spacer"></span>
-      <button class="tb-btn" id="btn-prev" onclick="prevChapter()" disabled>◁</button>
-      <button class="tb-btn" id="btn-next" onclick="nextChapter()" disabled>▷</button>
+      <button class="tb-btn" id="btn-prev" onclick="prevChapter()" disabled title="上一章">◁</button>
+      <button class="tb-btn" id="btn-next" onclick="nextChapter()" disabled title="下一章">▷</button>
+      <button class="tb-btn" id="btn-theme" onclick="toggleTheme()" title="深色模式">◐</button>
     </div>
     <div class="reader-area" id="reader-area">
       <div class="reader-placeholder" id="placeholder">
@@ -152,7 +134,6 @@ body{
     </div>
   </div>
 
-  <!-- 浮动翻页 -->
   <div class="floating-nav" id="floating-nav" style="display:none">
     <button onclick="prevChapter()" id="f-prev" disabled>← 上一章</button>
     <span class="nav-title" id="f-title"></span>
@@ -162,191 +143,78 @@ body{
 
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script>
+// ===== Theme =====
+(function(){
+  if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark');
+})();
+function toggleTheme(){
+  var isDark = document.body.classList.toggle('dark');
+  localStorage.setItem('theme', isDark ? 'dark' : 'light');
+}
+
+// ===== Config =====
 var params = new URLSearchParams(window.location.search);
 var bookId = params.get('book') || 'neon-dust';
-
 var BOOKS = {
-  "neon-dust": {
-    title: "霓虹尘埃", sub: "新天城 · 赛博朋克 · 热血长篇",
-    owner: "DeadlyJoker", repo: "novel-apocalypse", path: "neon-dust/chapters",
-    volPat: /^VOLUME-(\d+)/, chPat: /CHAPTER-(\d+)\.md$/,
-    volNames: {"VOLUME-01":"第一幕 · 钢铁医生","VOLUME-02":"第二幕 · 钢铁兄弟","VOLUME-03":"第三幕","VOLUME-04":"第四幕","VOLUME-05":"第五幕"}
-  },
-  "apocalypse": {
-    title: "末日进化：基因王座", sub: "末日题材 · 基因进化 · 爽文",
-    owner: "DeadlyJoker", repo: "novel-apocalypse", path: "chapters",
-    volPat: null, chPat: /^(\d+)-/,
-    volNames: {}
-  }
+  "neon-dust":{title:"霓虹尘埃",sub:"新天城 · 赛博朋克 · 热血长篇",owner:"DeadlyJoker",repo:"novel-apocalypse",path:"neon-dust/chapters",volPat:/^VOLUME-(\d+)/,chPat:/CHAPTER-(\d+)\.md$/,volNames:{"VOLUME-01":"第一幕 · 钢铁医生","VOLUME-02":"第二幕 · 钢铁兄弟"}},
+  "apocalypse":{title:"末日进化：基因王座",sub:"末日题材 · 基因进化 · 爽文",owner:"DeadlyJoker",repo:"novel-apocalypse",path:"chapters",volPat:null,chPat:/^(\d+)-/,volNames:{}}
 };
-
 var book = BOOKS[bookId];
-if (!book) { document.getElementById('chapter-list').innerHTML = '未知书籍'; }
-
 document.getElementById('book-title').textContent = book.title;
 document.getElementById('book-sub').textContent = book.sub + ' · ' + book.path;
 
-var allChapters = [];
-var currentIdx = -1;
+var allChapters=[],currentIdx=-1;
 
-var CHAPTER_NAMES = {
-  'VOLUME-01-CHAPTER-01':'序章：新秩序','VOLUME-01-CHAPTER-02':'地下区的医生','VOLUME-01-CHAPTER-03':'血手帮的阴影',
-  'VOLUME-01-CHAPTER-04':'铁牙来访','VOLUME-01-CHAPTER-05':'灰色包裹','VOLUME-01-CHAPTER-06':'地下工坊',
-  'VOLUME-01-CHAPTER-07':'废城的规矩','VOLUME-01-CHAPTER-08':'灰衣的注视','VOLUME-01-CHAPTER-09':'普罗米修斯',
-  'VOLUME-01-CHAPTER-10':'断裂的连线','VOLUME-01-CHAPTER-11':'深夜访客','VOLUME-01-CHAPTER-12':'老狗坠楼',
-  'VOLUME-01-CHAPTER-13':'地下火光','VOLUME-01-CHAPTER-14':'灰衣特工','VOLUME-01-CHAPTER-15':'苏焰的任务',
-  'VOLUME-01-CHAPTER-16':'逃亡路线','VOLUME-01-CHAPTER-17':'小满的求救','VOLUME-01-CHAPTER-18':'铁牙的算盘',
-  'VOLUME-01-CHAPTER-19':'废城之战（序）','VOLUME-01-CHAPTER-20':'废城之战（起）','VOLUME-01-CHAPTER-21':'废城之战（承）',
-  'VOLUME-01-CHAPTER-22':'废城之战（转）','VOLUME-01-CHAPTER-23':'废城之战（合）','VOLUME-01-CHAPTER-24':'钢铁医生',
-  'VOLUME-01-CHAPTER-25':'地下区的清晨','VOLUME-01-CHAPTER-26':'义体工坊','VOLUME-01-CHAPTER-27':'钢钉的故事',
-  'VOLUME-01-CHAPTER-28':'苏焰的伤','VOLUME-01-CHAPTER-29':'左臂的秘密','VOLUME-01-CHAPTER-30':'王景明的回声',
-  'VOLUME-01-CHAPTER-31':'铁牙的野心','VOLUME-01-CHAPTER-32':'蛇牙会的覆灭','VOLUME-01-CHAPTER-33':'老陈的情报',
-  'VOLUME-01-CHAPTER-34':'钱爷的债','VOLUME-01-CHAPTER-35':'泰坦的灰衣','VOLUME-01-CHAPTER-36':'克莱恩的微笑',
-  'VOLUME-01-CHAPTER-37':'普罗米修斯实验','VOLUME-01-CHAPTER-38':'父母的名字','VOLUME-01-CHAPTER-39':'小满的电磁',
-  'VOLUME-01-CHAPTER-40':'灰衣的追击','VOLUME-01-CHAPTER-41':'苏焰的选择','VOLUME-01-CHAPTER-42':'废城的夜晚',
-  'VOLUME-01-CHAPTER-43':'地下通道','VOLUME-01-CHAPTER-44':'第二地下城','VOLUME-01-CHAPTER-45':'回收者的地盘',
-  'VOLUME-01-CHAPTER-46':'黑市的交易','VOLUME-01-CHAPTER-47':'克莱恩的交易','VOLUME-01-CHAPTER-48':'防护罩',
-  'VOLUME-01-CHAPTER-49':'绝境求生','VOLUME-01-CHAPTER-50':'转折点','VOLUME-01-CHAPTER-51':'废城联盟',
-  'VOLUME-01-CHAPTER-52':'铁拳崛起','VOLUME-01-CHAPTER-53':'敌人的敌人','VOLUME-01-CHAPTER-54':'地下战线',
-  'VOLUME-01-CHAPTER-55':'最终布局','VOLUME-01-CHAPTER-56':'袭击计划','VOLUME-01-CHAPTER-57':'潜入泰坦',
-  'VOLUME-01-CHAPTER-58':'核心数据','VOLUME-01-CHAPTER-59':'逃亡之路','VOLUME-01-CHAPTER-60':'数据之战',
-  'VOLUME-01-CHAPTER-61':'灰衣的背叛','VOLUME-01-CHAPTER-62':'泰坦的反击','VOLUME-01-CHAPTER-63':'废城的防御',
-  'VOLUME-01-CHAPTER-64':'血腥战斗','VOLUME-01-CHAPTER-65':'黎明前夕','VOLUME-01-CHAPTER-66':'新的一天',
-  'VOLUME-01-CHAPTER-67':'余波','VOLUME-01-CHAPTER-68':'重建','VOLUME-01-CHAPTER-69':'王景明的遗产',
-  'VOLUME-01-CHAPTER-70':'云端永生的真相','VOLUME-01-CHAPTER-71':'记忆碎片','VOLUME-01-CHAPTER-72':'小满的觉醒',
-  'VOLUME-01-CHAPTER-73':'苏焰的身世','VOLUME-01-CHAPTER-74':'兄妹的线索','VOLUME-01-CHAPTER-75':'泰坦的阴影',
-  'VOLUME-01-CHAPTER-76':'钱爷的棋局','VOLUME-01-CHAPTER-77':'铁穹雇佣兵','VOLUME-01-CHAPTER-78':'月球来信',
-  'VOLUME-01-CHAPTER-79':'末路抉择','VOLUME-01-CHAPTER-80':'卷终·钢铁医生',
-  'VOLUME-02-CHAPTER-01':'铁拳的邀请','VOLUME-02-CHAPTER-02':'义体工坊','VOLUME-02-CHAPTER-03':'钢钉',
-  'VOLUME-02-CHAPTER-004':'小满的新世界','VOLUME-02-CHAPTER-005':'地下区的第三股势力','VOLUME-02-CHAPTER-006':'工坊首单',
-  'VOLUME-02-CHAPTER-07':'人质','VOLUME-02-CHAPTER-08':'钱爷的棋局','VOLUME-02-CHAPTER-09':'苏焰的旧伤',
-  'VOLUME-02-CHAPTER-10':'克莱恩的交易','VOLUME-02-CHAPTER-11':'铁牙的算盘','VOLUME-02-CHAPTER-12':'月光照不到的地方',
-  'VOLUME-02-CHAPTER-13':'战争准备','VOLUME-02-CHAPTER-14':'开战','VOLUME-02-CHAPTER-15':'机甲之战',
-  'VOLUME-02-CHAPTER-16':'战利品','VOLUME-02-CHAPTER-17':'黑星的秘密','VOLUME-02-CHAPTER-18':'停战',
-  'VOLUME-02-CHAPTER-19':'旧伤复发','VOLUME-02-CHAPTER-20':'苏焰的过去','VOLUME-02-CHAPTER-21':'废城扩建',
-  'VOLUME-02-CHAPTER-22':'左臂的对话','VOLUME-02-CHAPTER-23':'白博士的下落','VOLUME-02-CHAPTER-24':'中转站',
-  'VOLUME-02-CHAPTER-25':'监控与反监控','VOLUME-02-CHAPTER-26':'白博士','VOLUME-02-CHAPTER-27':'太平间的深夜对话',
-  'VOLUME-02-CHAPTER-28':'钱爷的真面目','VOLUME-02-CHAPTER-29':'与钱爷的第二次见面','VOLUME-02-CHAPTER-30':'线索',
-  'VOLUME-02-CHAPTER-31':'潜入计划','VOLUME-02-CHAPTER-32':'废城的夜','VOLUME-02-CHAPTER-33':'泰坦总部入口','VOLUME-02-CHAPTER-34':'地下实验室'
+// Chapter names
+var CN = {
+'VOLUME-01-CHAPTER-01':'序章：新秩序','VOLUME-01-CHAPTER-02':'地下区的医生','VOLUME-01-CHAPTER-03':'血手帮的阴影','VOLUME-01-CHAPTER-04':'铁牙来访','VOLUME-01-CHAPTER-05':'灰色包裹','VOLUME-01-CHAPTER-06':'地下工坊','VOLUME-01-CHAPTER-07':'废城的规矩','VOLUME-01-CHAPTER-08':'灰衣的注视','VOLUME-01-CHAPTER-09':'普罗米修斯','VOLUME-01-CHAPTER-10':'断裂的连线','VOLUME-01-CHAPTER-11':'深夜访客','VOLUME-01-CHAPTER-12':'老狗坠楼','VOLUME-01-CHAPTER-13':'地下火光','VOLUME-01-CHAPTER-14':'灰衣特工','VOLUME-01-CHAPTER-15':'苏焰的任务','VOLUME-01-CHAPTER-16':'逃亡路线','VOLUME-01-CHAPTER-17':'小满的求救','VOLUME-01-CHAPTER-18':'铁牙的算盘','VOLUME-01-CHAPTER-19':'废城之战（序）','VOLUME-01-CHAPTER-20':'废城之战（起）','VOLUME-01-CHAPTER-21':'废城之战（承）','VOLUME-01-CHAPTER-22':'废城之战（转）','VOLUME-01-CHAPTER-23':'废城之战（合）','VOLUME-01-CHAPTER-24':'钢铁医生','VOLUME-01-CHAPTER-25':'地下区的清晨','VOLUME-01-CHAPTER-26':'义体工坊','VOLUME-01-CHAPTER-27':'钢钉的故事','VOLUME-01-CHAPTER-28':'苏焰的伤','VOLUME-01-CHAPTER-29':'左臂的秘密','VOLUME-01-CHAPTER-30':'王景明的回声','VOLUME-01-CHAPTER-31':'铁牙的野心','VOLUME-01-CHAPTER-32':'蛇牙会的覆灭','VOLUME-01-CHAPTER-33':'老陈的情报','VOLUME-01-CHAPTER-34':'钱爷的债','VOLUME-01-CHAPTER-35':'泰坦的灰衣','VOLUME-01-CHAPTER-36':'克莱恩的微笑','VOLUME-01-CHAPTER-37':'普罗米修斯实验','VOLUME-01-CHAPTER-38':'父母的名字','VOLUME-01-CHAPTER-39':'小满的电磁','VOLUME-01-CHAPTER-40':'灰衣的追击','VOLUME-01-CHAPTER-41':'苏焰的选择','VOLUME-01-CHAPTER-42':'废城的夜晚','VOLUME-01-CHAPTER-43':'地下通道','VOLUME-01-CHAPTER-44':'第二地下城','VOLUME-01-CHAPTER-45':'回收者的地盘','VOLUME-01-CHAPTER-46':'黑市的交易','VOLUME-01-CHAPTER-47':'克莱恩的交易','VOLUME-01-CHAPTER-48':'防护罩','VOLUME-01-CHAPTER-49':'绝境求生','VOLUME-01-CHAPTER-50':'转折点','VOLUME-01-CHAPTER-51':'废城联盟','VOLUME-01-CHAPTER-52':'铁拳崛起','VOLUME-01-CHAPTER-53':'敌人的敌人','VOLUME-01-CHAPTER-54':'地下战线','VOLUME-01-CHAPTER-55':'最终布局','VOLUME-01-CHAPTER-56':'袭击计划','VOLUME-01-CHAPTER-57':'潜入泰坦','VOLUME-01-CHAPTER-58':'核心数据','VOLUME-01-CHAPTER-59':'逃亡之路','VOLUME-01-CHAPTER-60':'数据之战','VOLUME-01-CHAPTER-61':'灰衣的背叛','VOLUME-01-CHAPTER-62':'泰坦的反击','VOLUME-01-CHAPTER-63':'废城的防御','VOLUME-01-CHAPTER-64':'血腥战斗','VOLUME-01-CHAPTER-65':'黎明前夕','VOLUME-01-CHAPTER-66':'新的一天','VOLUME-01-CHAPTER-67':'余波','VOLUME-01-CHAPTER-68':'重建','VOLUME-01-CHAPTER-69':'王景明的遗产','VOLUME-01-CHAPTER-70':'云端永生的真相','VOLUME-01-CHAPTER-71':'记忆碎片','VOLUME-01-CHAPTER-72':'小满的觉醒','VOLUME-01-CHAPTER-73':'苏焰的身世','VOLUME-01-CHAPTER-74':'兄妹的线索','VOLUME-01-CHAPTER-75':'泰坦的阴影','VOLUME-01-CHAPTER-76':'钱爷的棋局','VOLUME-01-CHAPTER-77':'铁穹雇佣兵','VOLUME-01-CHAPTER-78':'月球来信','VOLUME-01-CHAPTER-79':'末路抉择','VOLUME-01-CHAPTER-80':'卷终·钢铁医生','VOLUME-02-CHAPTER-01':'铁拳的邀请','VOLUME-02-CHAPTER-02':'义体工坊','VOLUME-02-CHAPTER-03':'钢钉','VOLUME-02-CHAPTER-004':'小满的新世界','VOLUME-02-CHAPTER-005':'地下区的第三股势力','VOLUME-02-CHAPTER-006':'工坊首单','VOLUME-02-CHAPTER-07':'人质','VOLUME-02-CHAPTER-08':'钱爷的棋局','VOLUME-02-CHAPTER-09':'苏焰的旧伤','VOLUME-02-CHAPTER-10':'克莱恩的交易','VOLUME-02-CHAPTER-11':'铁牙的算盘','VOLUME-02-CHAPTER-12':'月光照不到的地方','VOLUME-02-CHAPTER-13':'战争准备','VOLUME-02-CHAPTER-14':'开战','VOLUME-02-CHAPTER-15':'机甲之战','VOLUME-02-CHAPTER-16':'战利品','VOLUME-02-CHAPTER-17':'黑星的秘密','VOLUME-02-CHAPTER-18':'停战','VOLUME-02-CHAPTER-19':'旧伤复发','VOLUME-02-CHAPTER-20':'苏焰的过去','VOLUME-02-CHAPTER-21':'废城扩建','VOLUME-02-CHAPTER-22':'左臂的对话','VOLUME-02-CHAPTER-23':'白博士的下落','VOLUME-02-CHAPTER-24':'中转站','VOLUME-02-CHAPTER-25':'监控与反监控','VOLUME-02-CHAPTER-26':'白博士','VOLUME-02-CHAPTER-27':'太平间的深夜对话','VOLUME-02-CHAPTER-28':'钱爷的真面目','VOLUME-02-CHAPTER-29':'与钱爷的第二次见面','VOLUME-02-CHAPTER-30':'线索','VOLUME-02-CHAPTER-31':'潜入计划','VOLUME-02-CHAPTER-32':'废城的夜','VOLUME-02-CHAPTER-33':'泰坦总部入口','VOLUME-02-CHAPTER-34':'地下实验室'
 };
+function getName(name){var k=name.replace(/\.md$/,''),n=CN[k];if(n){if(n.match(/^(第\d+章|序章)/))return n;return'第'+k.replace(/^.*CHAPTER-/,'').replace(/^0+/,'')+'章 '+n}return'第'+k.replace(/^.*CHAPTER-/,'').replace(/^0+/,'')+'章'}
 
-function getChapterName(name) {
-  var key = name.replace(/\.md$/,'');
-  var named = CHAPTER_NAMES[key];
-  if (named) {
-    if (named.match(/^(第\d+章|序章)/)) return named;
-    return '第' + key.replace(/^.*CHAPTER-/,'').replace(/^0+/,'') + '章 ' + named;
-  }
-  return '第' + key.replace(/^.*CHAPTER-/,'').replace(/^0+/,'') + '章';
-}
+// ===== Load =====
+fetch('https://api.github.com/repos/'+book.owner+'/'+book.repo+'/contents/'+book.path,{headers:{'Accept':'application/vnd.github.v3+json'}})
+.then(function(r){if(!r.ok)throw Error('HTTP '+r.status);return r.json()})
+.then(function(files){
+  var md=files.filter(function(f){return f.name.endsWith('.md')}),vols={};
+  md.forEach(function(f){var vm=f.name.match(book.volPat),cm=f.name.match(book.chPat);if(!vm||!cm)return;var vk='VOLUME-'+vm[1];if(!vols[vk])vols[vk]=[];vols[vk].push({num:parseInt(cm[1]),name:f.name,url:f.download_url})});
+  var h='';Object.keys(vols).sort().forEach(function(vk){vols[vk].sort(function(a,b){return a.num-b.num});h+='<div class="vol-group"><div class="vol-title">'+(book.volNames[vk]||vk)+'</div>';vols[vk].forEach(function(c){var dn=getName(c.name);h+='<div class="ch-item" data-idx="'+allChapters.length+'" onclick="loadChapter('+allChapters.length+')">'+dn+'</div>';allChapters.push({url:c.url,name:dn})});h+='</div>'});
+  document.getElementById('chapter-list').innerHTML=h;
+  if(allChapters.length)loadChapter(0);
+}).catch(function(e){document.getElementById('chapter-list').innerHTML='<div class="error">'+e.message+'</div>'});
 
-// Fetch chapters
-var apiUrl = 'https://api.github.com/repos/' + book.owner + '/' + book.repo + '/contents/' + book.path;
-
-fetch(apiUrl, { headers: { 'Accept': 'application/vnd.github.v3+json' } })
-  .then(function(r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
-  .then(renderSidebar)
-  .catch(function(e) {
-    document.getElementById('chapter-list').innerHTML = '<div class="error">加载失败: ' + e.message + '</div>';
-  });
-
-function renderSidebar(files) {
-  var mdFiles = files.filter(function(f) { return f.name.endsWith('.md'); });
-  var vols = {};
-  mdFiles.forEach(function(f) {
-    var vm = f.name.match(book.volPat);
-    var cm = f.name.match(book.chPat);
-    if (!vm || !cm) return;
-    var vk = 'VOLUME-' + vm[1];
-    if (!vols[vk]) vols[vk] = [];
-    vols[vk].push({ num: parseInt(cm[1]), name: f.name, url: f.download_url });
-  });
-  
-  var html = '';
-  Object.keys(vols).sort().forEach(function(vk) {
-    vols[vk].sort(function(a,b) { return a.num - b.num; });
-    html += '<div class="vol-group"><div class="vol-title">' + (book.volNames[vk] || vk) + '</div>';
-    vols[vk].forEach(function(c) {
-      var dn = getChapterName(c.name);
-      html += '<div class="ch-item" data-idx="' + allChapters.length + '" onclick="loadChapter(' + allChapters.length + ')">' + dn + '</div>';
-      allChapters.push({ url: c.url, name: dn });
-    });
-    html += '</div>';
-  });
-  document.getElementById('chapter-list').innerHTML = html;
-  if (allChapters.length > 0) loadChapter(0);
-}
-
-// Load chapter
-function loadChapter(idx) {
-  if (idx < 0 || idx >= allChapters.length) return;
-  currentIdx = idx;
-  
-  document.querySelectorAll('.ch-item').forEach(function(el) {
-    el.classList.toggle('active', parseInt(el.getAttribute('data-idx')) === idx);
-  });
-  
-  var ch = allChapters[idx];
-  var area = document.getElementById('reader-area');
-  var ph = document.getElementById('placeholder');
-  if (ph) ph.style.display = 'none';
-  area.innerHTML = '<div class="loading">加载中...</div>';
-  
-  document.getElementById('toolbar-title').innerHTML = '<strong>' + ch.name + '</strong>';
-  
-  // 浮动导航
-  var fn = document.getElementById('floating-nav');
-  fn.style.display = 'flex';
-  document.getElementById('f-title').textContent = (idx+1) + ' / ' + allChapters.length;
-  document.getElementById('f-prev').disabled = (idx <= 0);
-  document.getElementById('f-next').disabled = (idx >= allChapters.length - 1);
-  
-  // 工具栏按钮
-  document.getElementById('btn-prev').disabled = (idx <= 0);
-  document.getElementById('btn-next').disabled = (idx >= allChapters.length - 1);
-  
+// ===== Reader =====
+function loadChapter(idx){
+  if(idx<0||idx>=allChapters.length)return;currentIdx=idx;
+  document.querySelectorAll('.ch-item').forEach(function(el){el.classList.toggle('active',parseInt(el.getAttribute('data-idx'))===idx)});
+  var ch=allChapters[idx],area=document.getElementById('reader-area'),ph=document.getElementById('placeholder');
+  if(ph)ph.style.display='none';area.innerHTML='<div class="loading">加载中...</div>';
+  document.getElementById('toolbar-title').innerHTML='<strong>'+ch.name+'</strong>';
+  document.getElementById('btn-prev').disabled=(idx<=0);
+  document.getElementById('btn-next').disabled=(idx>=allChapters.length-1);
+  var fn=document.getElementById('floating-nav');fn.style.display='flex';
+  document.getElementById('f-title').textContent=(idx+1)+' / '+allChapters.length;
+  document.getElementById('f-prev').disabled=(idx<=0);
+  document.getElementById('f-next').disabled=(idx>=allChapters.length-1);
   document.getElementById('btn-toc').classList.add('active');
-  
-  // Scroll active chapter into sidebar view
-  var activeEl = document.querySelector('.ch-item.active');
-  if (activeEl) activeEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  
-  fetch(ch.url).then(function(r) { return r.text(); }).then(function(md) {
-    var prevBtn = idx > 0 ? '<a href="#" onclick="loadChapter(' + (idx-1) + ');return false">← 上一章</a>' : '<a class="disabled">← 上一章</a>';
-    var nextBtn = idx < allChapters.length - 1 ? '<a href="#" onclick="loadChapter(' + (idx+1) + ');return false">下一章 →</a>' : '<a class="disabled">下一章 →</a>';
-    area.innerHTML = '<div class="reader-area-inner"><div class="chapter-content">' +
-      marked.parse(md) +
-      '</div><div class="bottom-nav">' + prevBtn + nextBtn + '</div></div>';
-    area.scrollTop = 0;
-  }).catch(function(e) {
-    area.innerHTML = '<div class="error">加载失败: ' + e.message + '</div>';
-  });
+  var ae=document.querySelector('.ch-item.active');if(ae)ae.scrollIntoView({behavior:'smooth',block:'nearest'});
+  fetch(ch.url).then(function(r){return r.text()}).then(function(md){
+    var p=idx>0?'<a href="#" onclick="loadChapter('+(idx-1)+');return false">← 上一章</a>':'<a class="disabled">← 上一章</a>';
+    var n=idx<allChapters.length-1?'<a href="#" onclick="loadChapter('+(idx+1)+');return false">下一章 →</a>':'<a class="disabled">下一章 →</a>';
+    area.innerHTML='<div class="reader-area-inner"><div class="chapter-content">'+marked.parse(md)+'</div><div class="bottom-nav">'+p+n+'</div></div>';
+    area.scrollTop=0;
+  }).catch(function(e){area.innerHTML='<div class="error">'+e.message+'</div>'});
 }
+function prevChapter(){if(currentIdx>0)loadChapter(currentIdx-1)}
+function nextChapter(){if(currentIdx<allChapters.length-1)loadChapter(currentIdx+1)}
 
-function prevChapter() { if (currentIdx > 0) loadChapter(currentIdx - 1); }
-function nextChapter() { if (currentIdx < allChapters.length - 1) loadChapter(currentIdx + 1); }
-
-// Sidebar toggle (works on all screen sizes)
-function toggleSidebar() {
-  var sb = document.getElementById('sidebar');
-  var ov = document.getElementById('overlay');
-  var btn = document.getElementById('btn-toc');
-  var isDesktop = window.innerWidth > 768;
-  
-  if (isDesktop) {
-    sb.classList.toggle('collapsed');
-    btn.classList.toggle('active', !sb.classList.contains('collapsed'));
-    btn.innerHTML = sb.classList.contains('collapsed') ? '☰ 目录' : '☰ 收起';
-  } else {
-    sb.classList.toggle('collapsed');
-    ov.classList.toggle('show');
-    if (sb.classList.contains('collapsed')) {
-      btn.classList.remove('active');
-      btn.innerHTML = '☰ 目录';
-    } else {
-      btn.classList.add('active');
-      btn.innerHTML = '☰ 收起';
-    }
+// ===== Sidebar =====
+function toggleSidebar(){
+  var sb=document.getElementById('sidebar'),ov=document.getElementById('overlay'),btn=document.getElementById('btn-toc');
+  if(window.innerWidth>768){
+    sb.classList.toggle('collapsed');btn.classList.toggle('active',!sb.classList.contains('collapsed'));
+  }else{
+    sb.classList.toggle('collapsed');ov.classList.toggle('show');
+    btn.classList.toggle('active',!sb.classList.contains('collapsed'));
   }
 }
 </script>
