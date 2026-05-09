@@ -64,7 +64,7 @@ body{
 
 .chapter-content{line-height:2;font-size:1em;animation:fadeIn 0.25s ease}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.chapter-content h2{font-size:1.15em;color:#1a1a1a;margin-bottom:24px;padding-bottom:0;border:none}
+.chapter-content h2{font-size:1.15em;color:#1a1a1a;margin-bottom:24px;padding-bottom:10px;border-bottom:1px solid #eeebe6}
 .chapter-content p{margin-bottom:1em;text-indent:2em}
 .chapter-content h3{font-size:1.05em;color:#1a1a1a;margin:1.5em 0 0.8em}
 .chapter-content blockquote{
@@ -72,7 +72,7 @@ body{
   background:#faf7f3;border-radius:0 6px 6px 0;color:#555;font-size:0.95em;
 }
 .chapter-content code{background:#f5f0eb;padding:1px 5px;border-radius:3px;font-size:0.9em;color:var(--accent)}
-.chapter-content hr{border:none;height:1px;background:var(--border);margin:1.5em 0}
+.chapter-content hr{border:none;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:2em 0}
 .chapter-content pre{background:#faf7f3;padding:14px;border-radius:8px;overflow-x:auto;margin:1em 0;font-size:0.9em;border:1px solid var(--border)}
 .reader-nav{margin-top:24px;display:flex;justify-content:space-between}
 .reader-nav a{
@@ -159,9 +159,9 @@ var currentIdx = -1;
 
 // 章节中文名称映射
 var CHAPTER_NAMES = {
-  'VOLUME-01-CHAPTER-01':'序章：新秩序','VOLUME-01-CHAPTER-02':'第2章：地下区的医生','VOLUME-01-CHAPTER-03':'第3章：血手帮的阴影',
-  'VOLUME-01-CHAPTER-04':'第4章：铁牙来访','VOLUME-01-CHAPTER-05':'第5章：灰色包裹','VOLUME-01-CHAPTER-06':'第6章：地下工坊',
-  'VOLUME-01-CHAPTER-07':'第7章：废城的规矩','VOLUME-01-CHAPTER-08':'第8章：灰衣的注视','VOLUME-01-CHAPTER-09':'第9章：普罗米修斯',
+  'VOLUME-01-CHAPTER-01':'序章：新秩序','VOLUME-01-CHAPTER-02':'地下区的医生','VOLUME-01-CHAPTER-03':'血手帮的阴影',
+  'VOLUME-01-CHAPTER-04':'铁牙来访','VOLUME-01-CHAPTER-05':'灰色包裹','VOLUME-01-CHAPTER-06':'地下工坊',
+  'VOLUME-01-CHAPTER-07':'废城的规矩','VOLUME-01-CHAPTER-08':'灰衣的注视','VOLUME-01-CHAPTER-09':'普罗米修斯',
   'VOLUME-01-CHAPTER-10':'第10章：断裂的连线','VOLUME-01-CHAPTER-11':'第11章：深夜访客','VOLUME-01-CHAPTER-12':'第12章：老狗坠楼',
   'VOLUME-01-CHAPTER-13':'第13章：地下火光','VOLUME-01-CHAPTER-14':'第14章：灰衣特工','VOLUME-01-CHAPTER-15':'第15章：苏焰的任务',
   'VOLUME-01-CHAPTER-16':'第16章：逃亡路线','VOLUME-01-CHAPTER-17':'第17章：小满的求救','VOLUME-01-CHAPTER-18':'第18章：铁牙的算盘',
@@ -194,17 +194,21 @@ var CHAPTER_NAMES = {
   'VOLUME-02-CHAPTER-16':'战利品','VOLUME-02-CHAPTER-17':'黑星的秘密','VOLUME-02-CHAPTER-18':'停战',
   'VOLUME-02-CHAPTER-19':'旧伤复发','VOLUME-02-CHAPTER-20':'苏焰的过去','VOLUME-02-CHAPTER-21':'废城扩建',
   'VOLUME-02-CHAPTER-22':'左臂的对话','VOLUME-02-CHAPTER-23':'白博士的下落','VOLUME-02-CHAPTER-24':'中转站',
-  'VOLUME-02-CHAPTER-25':'监控与反监控','VOLUME-02-CHAPTER-26':'','VOLUME-02-CHAPTER-27':'',
-  'VOLUME-02-CHAPTER-28':'','VOLUME-02-CHAPTER-29':'','VOLUME-02-CHAPTER-30':'',
-  'VOLUME-02-CHAPTER-31':'','VOLUME-02-CHAPTER-32':'','VOLUME-02-CHAPTER-33':'','VOLUME-02-CHAPTER-34':''
+  'VOLUME-02-CHAPTER-25':'监控与反监控','VOLUME-02-CHAPTER-26':'白博士','VOLUME-02-CHAPTER-27':'太平间的深夜对话',
+  'VOLUME-02-CHAPTER-28':'钱爷的真面目','VOLUME-02-CHAPTER-29':'与钱爷的第二次见面','VOLUME-02-CHAPTER-30':'线索',
+  'VOLUME-02-CHAPTER-31':'潜入计划','VOLUME-02-CHAPTER-32':'废城的夜','VOLUME-02-CHAPTER-33':'泰坦总部入口','VOLUME-02-CHAPTER-34':'地下实验室'
 };
 
 function getChapterName(name) {
   var key = name.replace(/\.md$/,'');
   var named = CHAPTER_NAMES[key];
-  if (named) { return '第' + key.replace(/^.*CHAPTER-/,'').replace(/^0+/,'') + '章 ' + named; }
+  if (named) {
+    // 如果标题已经包含'第X章'或'序章'前缀，直接使用
+    if (named.match(/^(第\d+章|序章)/)) { return named; }
+    return '第' + key.replace(/^.*CHAPTER-/,'').replace(/^0+/,'') + '章 ' + named;
+  }
   // fallback: 从文件名提取
-  return key.replace(/^.*CHAPTER-/,'').replace(/^0+/,'').replace(/-/g,' · ');
+  return '第' + key.replace(/^.*CHAPTER-/,'').replace(/^0+/,'') + '章';
 }
 
 // ===== GitHub API =====
