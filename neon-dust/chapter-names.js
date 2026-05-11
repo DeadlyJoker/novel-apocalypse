@@ -161,4 +161,5 @@ var CHAPTER_TITLES = {
   'VOLUME-02-CHAPTER-79': '裂痕',
   'VOLUME-02-CHAPTER-80': '王的权柄',
   'VOLUME-02-CHAPTER-81': '零点穿透',
+  'VOLUME-02-CHAPTER-82': '小满的极限',
 };
