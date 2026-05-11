@@ -165,4 +165,5 @@ var CHAPTER_TITLES = {
   'VOLUME-02-CHAPTER-83': '基因密钥',
   'VOLUME-02-CHAPTER-84': '后门',
   'VOLUME-02-CHAPTER-85': '公开日前夕',
+  'VOLUME-02-CHAPTER-86': '铁牙的背叛',
 };
