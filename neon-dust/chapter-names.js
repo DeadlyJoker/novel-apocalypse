@@ -163,4 +163,5 @@ var CHAPTER_TITLES = {
   'VOLUME-02-CHAPTER-81': '零点穿透',
   'VOLUME-02-CHAPTER-82': '小满的极限',
   'VOLUME-02-CHAPTER-83': '基因密钥',
+  'VOLUME-02-CHAPTER-84': '后门',
 };
