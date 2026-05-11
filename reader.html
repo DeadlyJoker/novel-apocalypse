@@ -93,11 +93,17 @@ body{
 .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.2);z-index:15}
 
 @media(max-width:768px){
-  .sidebar{position:fixed;left:0;top:0;height:100%;z-index:25;transition:transform 0.25s ease}
+  .sidebar{position:fixed;left:0;top:0;height:100%;z-index:25;transition:transform 0.25s ease;width:85vw;max-width:320px}
   .sidebar.collapsed{transform:translateX(-100%);margin-left:0}
   .overlay.show{display:block}
-  .reader-area-inner{padding:16px 16px 120px}
+  .overlay{cursor:pointer}
+  .reader-area-inner{padding:14px 14px 100px}
   .floating-nav{left:8px;right:8px;transform:none;justify-content:space-between;border-radius:16px}
+  /* 工具栏适配移动端 */
+  .toolbar{height:48px;padding:0 6px;gap:3px}
+  .tb-btn{min-width:40px;height:36px;font-size:0.9em}
+  .toolbar .tb-btn[id="btn-prev"],.toolbar .tb-btn[id="btn-next"]{display:none}
+  .tb-title{font-size:0.74em;max-width:40vw}
 }
 </style>
 </head>
@@ -184,7 +190,7 @@ fetch('https://api.github.com/repos/'+book.owner+'/'+book.repo+'/contents/'+book
 
 // ===== Reader =====
 function loadChapter(idx){
-  if(idx<0||idx>=allChapters.length)return;currentIdx=idx;
+  if(idx<0||idx>=allChapters.length)return;currentIdx=idx;closeSidebarMobile();
   document.querySelectorAll('.ch-item').forEach(function(el){el.classList.toggle('active',parseInt(el.getAttribute('data-idx'))===idx)});
   var ch=allChapters[idx],area=document.getElementById('reader-area'),ph=document.getElementById('placeholder');
   if(ph)ph.style.display='none';area.innerHTML='<div class="loading">加载中...</div>';
@@ -215,6 +221,21 @@ function toggleSidebar(){
   }else{
     sb.classList.toggle('collapsed');ov.classList.toggle('show');
     btn.classList.toggle('active',!sb.classList.contains('collapsed'));
+  }
+}
+// ===== Mobile: close sidebar =====
+document.getElementById('overlay').addEventListener('click',function(){
+  if(window.innerWidth<=768){
+    document.getElementById('sidebar').classList.add('collapsed');
+    this.classList.remove('show');
+    document.getElementById('btn-toc').classList.remove('active');
+  }
+});
+function closeSidebarMobile(){
+  if(window.innerWidth<=768){
+    document.getElementById('sidebar').classList.add('collapsed');
+    document.getElementById('overlay').classList.remove('show');
+    document.getElementById('btn-toc').classList.remove('active');
   }
 }
 </script>
