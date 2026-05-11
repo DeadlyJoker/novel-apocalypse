@@ -173,4 +173,5 @@ var CHAPTER_TITLES = {
   'VOLUME-02-CHAPTER-91': '云端坠毁',
   'VOLUME-02-CHAPTER-92': '地下之王',
   'VOLUME-02-CHAPTER-93': '克莱恩的最后线索',
+  'VOLUME-02-CHAPTER-94': '埃里希',
 };
