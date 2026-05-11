@@ -168,4 +168,5 @@ var CHAPTER_TITLES = {
   'VOLUME-02-CHAPTER-86': '铁牙的背叛',
   'VOLUME-02-CHAPTER-87': '废城之战（终）',
   'VOLUME-02-CHAPTER-88': '兄弟对决',
+  'VOLUME-02-CHAPTER-89': '铁牙的退场',
 };
