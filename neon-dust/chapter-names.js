@@ -157,4 +157,5 @@ var CHAPTER_TITLES = {
   'VOLUME-02-CHAPTER-75': '复制品的人权',
   'VOLUME-02-CHAPTER-76': '王珞',
   'VOLUME-02-CHAPTER-77': '公开日',
+  'VOLUME-02-CHAPTER-78': '铁牙的去向',
 };
