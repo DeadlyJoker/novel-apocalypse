@@ -192,4 +192,5 @@ var CHAPTER_TITLES = {
   'VOLUME-03-CHAPTER-10': '第一块拼图',
   'VOLUME-03-CHAPTER-11': '埃里希的实验室',
   'VOLUME-03-CHAPTER-12': '云端永生的真相',
+  'VOLUME-03-CHAPTER-13': '沈琳的发现',
 };
