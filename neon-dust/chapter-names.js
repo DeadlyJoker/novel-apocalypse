@@ -194,4 +194,5 @@ var CHAPTER_TITLES = {
   'VOLUME-03-CHAPTER-12': '云端永生的真相',
   'VOLUME-03-CHAPTER-13': '沈琳的发现',
   'VOLUME-03-CHAPTER-14': '监控种子',
+  'VOLUME-03-CHAPTER-15': '两个孩子的代价',
 };
