@@ -178,4 +178,5 @@ var CHAPTER_TITLES = {
   'VOLUME-02-CHAPTER-96': '霓虹之下',
   'VOLUME-02-CHAPTER-97': '暗流',
   'VOLUME-02-CHAPTER-98': '月球来信',
+  'VOLUME-02-CHAPTER-99': '焊条',
 };
