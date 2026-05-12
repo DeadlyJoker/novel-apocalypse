@@ -189,4 +189,5 @@ var CHAPTER_TITLES = {
   'VOLUME-03-CHAPTER-07': '二十年笔记',
   'VOLUME-03-CHAPTER-08': '等待者',
   'VOLUME-03-CHAPTER-09': '交付',
+  'VOLUME-03-CHAPTER-10': '第一块拼图',
 };
