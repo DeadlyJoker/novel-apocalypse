@@ -198,4 +198,5 @@ var CHAPTER_TITLES = {
   'VOLUME-03-CHAPTER-16': '三个月的倒计时',
   'VOLUME-03-CHAPTER-17': '老孟的委托',
   'VOLUME-03-CHAPTER-18': '父母的选择',
+  'VOLUME-03-CHAPTER-19': '最后的交换',
 };
