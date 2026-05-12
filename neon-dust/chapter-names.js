@@ -183,4 +183,5 @@ var CHAPTER_TITLES = {
   'VOLUME-03-CHAPTER-01': '不去月球',
   'VOLUME-03-CHAPTER-02': '信使',
   'VOLUME-03-CHAPTER-03': '废城的日常',
+  'VOLUME-03-CHAPTER-04': '废墟的邀请',
 };
