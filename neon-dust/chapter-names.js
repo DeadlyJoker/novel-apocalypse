@@ -182,4 +182,5 @@ var CHAPTER_TITLES = {
   'VOLUME-02-CHAPTER-100': '新天城的黎明',
   'VOLUME-03-CHAPTER-01': '不去月球',
   'VOLUME-03-CHAPTER-02': '信使',
+  'VOLUME-03-CHAPTER-03': '废城的日常',
 };
