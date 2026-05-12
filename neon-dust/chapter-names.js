@@ -191,4 +191,5 @@ var CHAPTER_TITLES = {
   'VOLUME-03-CHAPTER-09': '交付',
   'VOLUME-03-CHAPTER-10': '第一块拼图',
   'VOLUME-03-CHAPTER-11': '埃里希的实验室',
+  'VOLUME-03-CHAPTER-12': '云端永生的真相',
 };
