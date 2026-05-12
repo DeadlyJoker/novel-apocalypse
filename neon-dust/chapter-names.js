@@ -176,4 +176,5 @@ var CHAPTER_TITLES = {
   'VOLUME-02-CHAPTER-94': '埃里希',
   'VOLUME-02-CHAPTER-95': '第二个影子',
   'VOLUME-02-CHAPTER-96': '霓虹之下',
+  'VOLUME-02-CHAPTER-97': '暗流',
 };
