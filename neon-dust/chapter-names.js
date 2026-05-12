@@ -216,4 +216,5 @@ var CHAPTER_TITLES = {
   'VOLUME-03-CHAPTER-34': '承诺',
   'VOLUME-03-CHAPTER-35': '埃里希的清洗',
   'VOLUME-03-CHAPTER-36': '铁牙',
+  'VOLUME-03-CHAPTER-37': '来客',
 };
