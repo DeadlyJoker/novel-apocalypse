@@ -202,4 +202,5 @@ var CHAPTER_TITLES = {
   'VOLUME-03-CHAPTER-20': '抹除',
   'VOLUME-03-CHAPTER-21': '之后的白博士',
   'VOLUME-03-CHAPTER-22': '白博士的女儿',
+  'VOLUME-03-CHAPTER-23': '白博士的二十年',
 };
