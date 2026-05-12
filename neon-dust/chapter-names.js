@@ -186,4 +186,5 @@ var CHAPTER_TITLES = {
   'VOLUME-03-CHAPTER-04': '废墟的邀请',
   'VOLUME-03-CHAPTER-05': '废墟层的影子',
   'VOLUME-03-CHAPTER-06': '无名者的痕迹',
+  'VOLUME-03-CHAPTER-07': '二十年笔记',
 };
