@@ -219,4 +219,5 @@ var CHAPTER_TITLES = {
   'VOLUME-03-CHAPTER-37': '来客',
   'VOLUME-03-CHAPTER-38': '预实验',
   'VOLUME-03-CHAPTER-39': '手术刀',
+  'VOLUME-03-CHAPTER-40': '小钰',
 };
