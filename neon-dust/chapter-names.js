@@ -204,4 +204,5 @@ var CHAPTER_TITLES = {
   'VOLUME-03-CHAPTER-22': '白博士的女儿',
   'VOLUME-03-CHAPTER-23': '白博士的二十年',
   'VOLUME-03-CHAPTER-24': '消化',
+  'VOLUME-03-CHAPTER-25': '回家',
 };
