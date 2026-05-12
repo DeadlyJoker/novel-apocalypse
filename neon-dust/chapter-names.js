@@ -207,4 +207,5 @@ var CHAPTER_TITLES = {
   'VOLUME-03-CHAPTER-25': '回家',
   'VOLUME-03-CHAPTER-26': '废城的反应',
   'VOLUME-03-CHAPTER-27': '解药算法',
+  'VOLUME-03-CHAPTER-28': '三天',
 };
