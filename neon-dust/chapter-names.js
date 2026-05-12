@@ -211,4 +211,5 @@ var CHAPTER_TITLES = {
   'VOLUME-03-CHAPTER-29': '破晓',
   'VOLUME-03-CHAPTER-30': '埃里希的留言',
   'VOLUME-03-CHAPTER-31': '铁牙的藏身处',
+  'VOLUME-03-CHAPTER-32': '废墟冶炼厂',
 };
