@@ -257,4 +257,5 @@ var CHAPTER_TITLES = {
   'VOLUME-03-CHAPTER-75': '加密分区',
   'VOLUME-03-CHAPTER-76': '最后的通讯',
   'VOLUME-03-CHAPTER-77': '三条名字',
+  'VOLUME-03-CHAPTER-78': '刀前',
 };
