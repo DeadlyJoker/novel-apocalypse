@@ -261,4 +261,5 @@ var CHAPTER_TITLES = {
   'VOLUME-03-CHAPTER-79': '术前准备',
   'VOLUME-03-CHAPTER-80': '苏焰的恐惧',
   'VOLUME-03-CHAPTER-81': '手术（上）',
+  'VOLUME-03-CHAPTER-82': '手术（中）',
 };
