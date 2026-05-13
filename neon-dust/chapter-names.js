@@ -243,4 +243,5 @@ var CHAPTER_TITLES = {
   'VOLUME-03-CHAPTER-61': '手稿',
   'VOLUME-03-CHAPTER-62': '自检',
   'VOLUME-03-CHAPTER-63': '第四阶段',
+  'VOLUME-03-CHAPTER-64': '急诊',
 };
