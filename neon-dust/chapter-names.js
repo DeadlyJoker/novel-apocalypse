@@ -242,4 +242,5 @@ var CHAPTER_TITLES = {
   'VOLUME-03-CHAPTER-60': '盒底的签名',
   'VOLUME-03-CHAPTER-61': '手稿',
   'VOLUME-03-CHAPTER-62': '自检',
+  'VOLUME-03-CHAPTER-63': '第四阶段',
 };
