@@ -229,4 +229,5 @@ var CHAPTER_TITLES = {
   'VOLUME-03-CHAPTER-47': '陪',
   'VOLUME-03-CHAPTER-48': '苏醒',
   'VOLUME-03-CHAPTER-49': '康复期',
+  'VOLUME-03-CHAPTER-50': '钱爷的邀请',
 };
