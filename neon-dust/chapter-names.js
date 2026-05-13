@@ -235,4 +235,5 @@ var CHAPTER_TITLES = {
   'VOLUME-03-CHAPTER-53': '王景明的遗产',
   'VOLUME-03-CHAPTER-54': '二十年的布局',
   'VOLUME-03-CHAPTER-55': '命运的重量',
+  'VOLUME-03-CHAPTER-56': '钱爷的注视',
 };
