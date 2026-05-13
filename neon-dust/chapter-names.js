@@ -237,4 +237,5 @@ var CHAPTER_TITLES = {
   'VOLUME-03-CHAPTER-55': '命运的重量',
   'VOLUME-03-CHAPTER-56': '钱爷的注视',
   'VOLUME-03-CHAPTER-57': '教官的忧虑',
+  'VOLUME-03-CHAPTER-58': '钢钉的信号',
 };
