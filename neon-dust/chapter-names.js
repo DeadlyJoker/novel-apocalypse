@@ -252,4 +252,5 @@ var CHAPTER_TITLES = {
   'VOLUME-03-CHAPTER-70': '老狗的完整记忆',
   'VOLUME-03-CHAPTER-71': '老狗的承诺',
   'VOLUME-03-CHAPTER-72': '父亲的遗嘱',
+  'VOLUME-03-CHAPTER-73': '遗嘱的内容',
 };
