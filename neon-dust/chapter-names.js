@@ -259,4 +259,5 @@ var CHAPTER_TITLES = {
   'VOLUME-03-CHAPTER-77': '三条名字',
   'VOLUME-03-CHAPTER-78': '刀前',
   'VOLUME-03-CHAPTER-79': '术前准备',
+  'VOLUME-03-CHAPTER-80': '苏焰的恐惧',
 };
