@@ -240,4 +240,5 @@ var CHAPTER_TITLES = {
   'VOLUME-03-CHAPTER-58': '钢钉的信号',
   'VOLUME-03-CHAPTER-59': '老狗的记忆碎片',
   'VOLUME-03-CHAPTER-60': '盒底的签名',
+  'VOLUME-03-CHAPTER-61': '手稿',
 };
