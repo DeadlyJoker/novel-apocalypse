@@ -222,4 +222,5 @@ var CHAPTER_TITLES = {
   'VOLUME-03-CHAPTER-40': '小钰',
   'VOLUME-03-CHAPTER-41': '沉睡',
   'VOLUME-03-CHAPTER-42': '神经战场',
+  'VOLUME-03-CHAPTER-43': '备线',
 };
