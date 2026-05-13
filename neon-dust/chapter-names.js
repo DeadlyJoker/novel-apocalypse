@@ -224,4 +224,5 @@ var CHAPTER_TITLES = {
   'VOLUME-03-CHAPTER-42': '神经战场',
   'VOLUME-03-CHAPTER-43': '备线',
   'VOLUME-03-CHAPTER-44': '管廊',
+  'VOLUME-03-CHAPTER-45': '王景明的留言',
 };
