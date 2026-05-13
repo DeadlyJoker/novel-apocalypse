@@ -246,4 +246,5 @@ var CHAPTER_TITLES = {
   'VOLUME-03-CHAPTER-64': '急诊',
   'VOLUME-03-CHAPTER-65': '赴约',
   'VOLUME-03-CHAPTER-66': '代价',
+  'VOLUME-03-CHAPTER-67': '面对',
 };
