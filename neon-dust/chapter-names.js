@@ -226,4 +226,5 @@ var CHAPTER_TITLES = {
   'VOLUME-03-CHAPTER-44': '管廊',
   'VOLUME-03-CHAPTER-45': '王景明的留言',
   'VOLUME-03-CHAPTER-46': '闭合',
+  'VOLUME-03-CHAPTER-47': '陪',
 };
