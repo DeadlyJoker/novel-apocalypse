@@ -266,4 +266,5 @@ var CHAPTER_TITLES = {
   'VOLUME-03-CHAPTER-84': '失去',
   'VOLUME-03-CHAPTER-85': '适应',
   'VOLUME-03-CHAPTER-86': '副作用',
+  'VOLUME-03-CHAPTER-87': '三岁的约定',
 };
