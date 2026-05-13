@@ -255,4 +255,5 @@ var CHAPTER_TITLES = {
   'VOLUME-03-CHAPTER-73': '遗嘱的内容',
   'VOLUME-03-CHAPTER-74': '消化遗嘱',
   'VOLUME-03-CHAPTER-75': '加密分区',
+  'VOLUME-03-CHAPTER-76': '最后的通讯',
 };
