@@ -232,4 +232,5 @@ var CHAPTER_TITLES = {
   'VOLUME-03-CHAPTER-50': '钱爷的邀请',
   'VOLUME-03-CHAPTER-51': '深渊酒吧',
   'VOLUME-03-CHAPTER-52': '王景明的人',
+  'VOLUME-03-CHAPTER-53': '王景明的遗产',
 };
