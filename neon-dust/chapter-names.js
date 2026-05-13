@@ -248,4 +248,5 @@ var CHAPTER_TITLES = {
   'VOLUME-03-CHAPTER-66': '代价',
   'VOLUME-03-CHAPTER-67': '面对',
   'VOLUME-03-CHAPTER-68': '联盟的反应',
+  'VOLUME-03-CHAPTER-69': '退',
 };
