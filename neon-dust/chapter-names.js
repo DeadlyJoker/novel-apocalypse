@@ -249,4 +249,5 @@ var CHAPTER_TITLES = {
   'VOLUME-03-CHAPTER-67': '面对',
   'VOLUME-03-CHAPTER-68': '联盟的反应',
   'VOLUME-03-CHAPTER-69': '退',
+  'VOLUME-03-CHAPTER-70': '老狗的完整记忆',
 };
