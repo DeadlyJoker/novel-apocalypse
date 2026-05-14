@@ -275,4 +275,5 @@ var CHAPTER_TITLES = {
   'VOLUME-03-CHAPTER-93': '休战',
   'VOLUME-03-CHAPTER-94': '废城的准备',
   'VOLUME-03-CHAPTER-95': '小满的新武器',
+  'VOLUME-03-CHAPTER-96': '最后一课',
 };
