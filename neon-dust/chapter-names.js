@@ -278,4 +278,5 @@ var CHAPTER_TITLES = {
   'VOLUME-03-CHAPTER-96': '最后一课',
   'VOLUME-03-CHAPTER-97': '教官的发现',
   'VOLUME-03-CHAPTER-98': '真相的边界',
+  'VOLUME-03-CHAPTER-99': '没有退路',
 };
