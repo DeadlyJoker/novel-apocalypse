@@ -271,4 +271,5 @@ var CHAPTER_TITLES = {
   'VOLUME-03-CHAPTER-89': '口信',
   'VOLUME-03-CHAPTER-90': '谈判',
   'VOLUME-03-CHAPTER-91': '对话埃里希（上）',
+  'VOLUME-03-CHAPTER-92': '对话埃里希（下）',
 };
