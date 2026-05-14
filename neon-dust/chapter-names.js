@@ -270,4 +270,5 @@ var CHAPTER_TITLES = {
   'VOLUME-03-CHAPTER-88': '克莱恩的归来',
   'VOLUME-03-CHAPTER-89': '口信',
   'VOLUME-03-CHAPTER-90': '谈判',
+  'VOLUME-03-CHAPTER-91': '对话埃里希（上）',
 };
