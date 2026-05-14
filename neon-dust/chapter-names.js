@@ -273,4 +273,5 @@ var CHAPTER_TITLES = {
   'VOLUME-03-CHAPTER-91': '对话埃里希（上）',
   'VOLUME-03-CHAPTER-92': '对话埃里希（下）',
   'VOLUME-03-CHAPTER-93': '休战',
+  'VOLUME-03-CHAPTER-94': '废城的准备',
 };
