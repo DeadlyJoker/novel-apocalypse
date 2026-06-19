@@ -280,4 +280,5 @@ var CHAPTER_TITLES = {
   'VOLUME-03-CHAPTER-98': '真相的边界',
   'VOLUME-03-CHAPTER-99': '没有退路',
   'VOLUME-03-CHAPTER-100': '最后的医生',
+  'VOLUME-04-CHAPTER-45': '一个月的尽头',
 };
