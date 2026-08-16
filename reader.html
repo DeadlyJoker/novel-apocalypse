@@ -162,7 +162,7 @@ function toggleTheme(){
 var params = new URLSearchParams(window.location.search);
 var bookId = params.get('book') || 'neon-dust';
 var BOOKS = {
-  "neon-dust":{title:"霓虹尘埃",sub:"新天城 · 赛博朋克 · 热血长篇",owner:"DeadlyJoker",repo:"novel-apocalypse",path:"neon-dust/chapters",volPat:/^VOLUME-(\d+)/,chPat:/CHAPTER-(\d+)\.md$/,volNames:{"VOLUME-01":"第一幕 · 钢铁医生","VOLUME-02":"第二幕 · 钢铁兄弟"}},
+  "neon-dust":{title:"霓虹尘埃",sub:"新天城 · 赛博朋克 · 热血长篇",owner:"DeadlyJoker",repo:"novel-apocalypse",path:"neon-dust/chapters",volPat:/^VOLUME-(\d+)/,chPat:/CHAPTER-(\d+)\.md$/,volNames:{"VOLUME-01":"第一幕 · 钢铁医生","VOLUME-02":"第二幕 · 钢铁兄弟","VOLUME-03":"第三幕 · 身世之秘","VOLUME-04":"第四幕 · 钢铁王座"}},
   "apocalypse":{title:"末日进化：基因王座",sub:"末日题材 · 基因进化 · 爽文",owner:"DeadlyJoker",repo:"novel-apocalypse",path:"chapters",volPat:null,chPat:/^(\d+)-/,volNames:{}}
 };
 var book = BOOKS[bookId];
